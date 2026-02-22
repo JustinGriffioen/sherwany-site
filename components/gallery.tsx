@@ -1,56 +1,99 @@
 import Image from "next/image"
+import { siteConfig } from "@/lib/site-config"
+import { fetchGooglePlaceData } from "@/lib/google-places"
+import type { Locale } from "@/lib/i18n"
+import { messages } from "@/lib/i18n/messages"
 
-export function Gallery() {
+const staticImages = [
+  "/images/haircut-in-action.jpg",
+  "/images/gallery-1.jpg",
+  "/images/gallery-2.jpg",
+  "/images/gallery/img-7566.png",
+  "/images/sherwany-barber.jpg",
+  "/images/gallery/img-7564.png",
+  "/images/gallery/img-7567.png",
+  "/images/gallery/img-7570.png",
+  "/images/gallery/img-7573.png",
+  "/images/gallery/img-7574.png",
+  "/images/gallery/img-7575.png",
+  "/images/gallery/img-7576.png",
+]
+
+export async function Gallery({ locale = "nl" }: { locale?: Locale }) {
+  const t = messages[locale].gallery
+  let googlePhotos: { url: string; widthPx: number; heightPx: number }[] = []
+  try {
+    if (process.env.GOOGLE_PLACES_API_KEY) {
+      const data = await fetchGooglePlaceData({
+        placeId: siteConfig.business.googlePlaceId ?? undefined,
+        searchQuery: "Sherwany barbershop A-Salon Deventer",
+        locationBias: {
+          lat: siteConfig.business.geo.latitude,
+          lng: siteConfig.business.geo.longitude,
+        },
+      })
+      googlePhotos = data.photos.slice(0, 6).map((p) => ({
+        url: p.url,
+        widthPx: p.widthPx,
+        heightPx: p.heightPx,
+      }))
+    }
+  } catch {
+    // Fallback: gallery uses only static images
+  }
+
+  const allImages = [
+    ...googlePhotos.map((p) => ({
+      src: p.url,
+      isExternal: true,
+      alt: "Sherwany Studio barbershop - Google foto",
+    })),
+    ...staticImages.map((src, i) => ({
+      src,
+      isExternal: false,
+      alt: `Sherwany Studio barbershop - foto ${i + 1}`,
+    })),
+  ]
+
+  // Fisher-Yates shuffle for random order
+  for (let i = allImages.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[allImages[i], allImages[j]] = [allImages[j], allImages[i]]
+  }
+
   return (
-    <section className="border-t border-border bg-card py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section className="border-t border-border bg-card py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-            Vind ons
+            {t.overline}
           </p>
-          <h2 className="mt-6 font-serif text-4xl font-normal leading-[1.15] text-foreground md:text-5xl lg:text-6xl">
-            Wij zijn de beste
+          <h2 className="mt-4 font-serif text-3xl font-normal leading-[1.15] text-foreground sm:mt-6 sm:text-4xl md:text-5xl lg:text-6xl">
+            {t.title}
             <br />
-            in wat we doen.
+            {t.titleLine2}
           </h2>
           <p className="mt-5 text-[15px] text-muted-foreground">
-            Kom het zelf zien!
+            {t.description}
           </p>
         </div>
 
         {/* Gallery grid */}
-        <div className="mt-16 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="relative aspect-[3/4] overflow-hidden">
-            <Image
-              src="/images/gallery-1.jpg"
-              alt="Barbier knipt haar met een schaar - Sherwany Studio"
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              loading="lazy"
-              className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
-            />
-          </div>
-          <div className="relative aspect-[3/4] overflow-hidden">
-            <Image
-              src="/images/hero-barbershop.jpg"
-              alt="Sherwany Studio barbershop interieur - Deventer"
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              loading="lazy"
-              className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
-            />
-          </div>
-          <div className="relative aspect-[3/4] overflow-hidden sm:col-span-2 lg:col-span-1">
-            <Image
-              src="/images/gallery-3.jpg"
-              alt="Warme handdoek behandeling in de barbershop - Sherwany Studio"
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              loading="lazy"
-              className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
-            />
-          </div>
+        <div className="mt-10 grid grid-cols-3 gap-1.5 sm:mt-16 sm:grid-cols-4 sm:gap-2 lg:grid-cols-5 lg:gap-2.5 xl:grid-cols-6">
+          {allImages.map((item) => (
+            <div key={item.src} className="relative aspect-[3/4] overflow-hidden">
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
+                loading="lazy"
+                className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
+                unoptimized={item.isExternal}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

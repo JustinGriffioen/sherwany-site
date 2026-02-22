@@ -1,20 +1,31 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { List, XLg, CalendarEvent } from "react-bootstrap-icons"
 import Image from "next/image"
-
-const navLinks = [
-  { label: "Over ons", href: "#over-ons" },
-  { label: "De barbier", href: "#team" },
-  { label: "Harsen", href: "#harsen" },
-  { label: "Prijzen", href: "#our-menu" },
-  { label: "Contact", href: "#footer" },
-]
+import { useLocale, useLocalePrefix } from "@/components/locale-provider"
+import { LanguageToggle } from "@/components/language-toggle"
+import { messages } from "@/lib/i18n/messages"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const locale = useLocale()
+  const prefix = useLocalePrefix()
+  const t = messages[locale].nav
+
+  const pathname = usePathname()
+  const homePath = prefix ? prefix : "/"
+  const isContactPage = pathname === "/contact" || pathname === "/en/contact"
+  const maakAfspraakHref = isContactPage ? `${prefix ? prefix : ""}/contact#footer` : `${homePath}#footer`
+  const navLinks = [
+    { label: t.overOns, href: `${homePath}#over-ons` },
+    { label: t.barbier, href: `${homePath}#team` },
+    { label: t.harsen, href: prefix ? `${prefix}/a-waxing` : "/a-waxing" },
+    { label: t.prijzen, href: `${homePath}#services` },
+    { label: t.contact, href: prefix ? `${prefix}/contact` : "/contact" },
+  ]
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50)
@@ -30,16 +41,17 @@ export function Navigation() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10 py-4">
-        <a href="#home" className="flex shrink-0 items-center gap-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-10">
+        <a href={homePath} className="flex shrink-0 items-center gap-3">
           <Image
             src="/images/logo.png"
-            alt="Sherwany Studio logo"
-            width={64}
-            height={64}
+            alt="Sherwany Barbershop & Studio logo"
+            width={200}
+            height={200}
             priority
-            quality={95}
-            className="h-12 w-12 brightness-0 invert"
+            quality={100}
+            sizes="(max-width: 768px) 120px, 200px"
+            className="h-12 w-auto brightness-0 invert"
           />
         </a>
 
@@ -55,44 +67,53 @@ export function Navigation() {
             </a>
           ))}
           <a
-            href="#our-menu"
-            className="border border-foreground px-7 py-2.5 text-[13px] font-medium uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            href={maakAfspraakHref}
+            className="flex items-center gap-2 border border-foreground px-7 py-2.5 text-[13px] font-medium uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
           >
-            Afspraak
+            <CalendarEvent className="h-4 w-4" />
+            {t.maakAfspraak}
           </a>
+          <LanguageToggle />
         </div>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="text-foreground md:hidden"
-          aria-label={isOpen ? "Menu sluiten" : "Menu openen"}
+          aria-label={isOpen ? t.menuClose : t.menuOpen}
         >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isOpen ? <XLg className="h-6 w-6" /> : <List className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {isOpen && (
         <div className="border-t border-border bg-background md:hidden">
-          <div className="flex flex-col px-6 py-6">
+          <div className="flex flex-col px-4 py-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="border-b border-border py-4 text-sm uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
+                className="border-b border-border py-4 text-sm uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground min-h-[44px] flex items-center"
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="#our-menu"
+              href={maakAfspraakHref}
               onClick={() => setIsOpen(false)}
-              className="mt-6 border border-foreground px-6 py-3 text-center text-[13px] font-medium uppercase tracking-[0.15em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+              className="flex items-center justify-center gap-2 border border-foreground px-6 py-3 text-center text-[13px] font-medium uppercase tracking-[0.15em] text-foreground transition-colors hover:bg-foreground hover:text-background"
             >
-              Maak Afspraak
+              <CalendarEvent className="h-4 w-4" />
+              {t.maakAfspraak}
             </a>
+            <div className="flex items-center justify-between border-b border-border py-4 mt-6">
+              <span className="text-sm uppercase tracking-[0.15em] text-muted-foreground">
+                {t.taal}
+              </span>
+              <LanguageToggle />
+            </div>
           </div>
         </div>
       )}

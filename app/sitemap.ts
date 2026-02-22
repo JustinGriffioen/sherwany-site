@@ -1,27 +1,35 @@
 import { MetadataRoute } from "next"
 import { siteConfig } from "@/lib/site-config"
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = siteConfig.url
+const baseUrl = siteConfig.url
 
-  return [
+const pages: { path: string; priority: number }[] = [
+  { path: "", priority: 1 },
+  { path: "/contact", priority: 0.9 },
+  { path: "/a-waxing", priority: 0.8 },
+]
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const date = new Date()
+  const langAlternates = (path: string) => ({
+    nl: `${baseUrl}${path}`,
+    en: `${baseUrl}/en${path}`,
+  })
+
+  return pages.flatMap(({ path, priority }) => [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: `${baseUrl}${path}`,
+      lastModified: date,
       changeFrequency: "weekly" as const,
-      priority: 1,
+      priority,
+      alternates: { languages: langAlternates(path) },
     },
     {
-      url: `${baseUrl}/#our-menu`,
-      lastModified: new Date(),
+      url: `${baseUrl}/en${path}`,
+      lastModified: date,
       changeFrequency: "weekly" as const,
-      priority: 0.9,
+      priority,
+      alternates: { languages: langAlternates(path) },
     },
-    {
-      url: `${baseUrl}/#footer`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-  ]
+  ])
 }

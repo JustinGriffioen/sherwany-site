@@ -1,140 +1,175 @@
-const diensten = [
-  {
-    name: "Model knippen",
-    description:
-      "Professionele herenkapsels die passen bij jouw stijl en persoonlijkheid, met zorg en aandacht voor detail.",
-    price: "25",
-  },
-  {
-    name: "Heren VIP (+2mL olie parfum van de zaak)",
-    description:
-      "Een luxe behandeling inclusief knippen, baard trimmen, gezichtsverzorging en waxen van wenkbrauwen en neus.",
-    price: "40",
-  },
-  {
-    name: "Model knippen & baard + wenkbrauwen & oor haren",
-    description:
-      "Stijlvol knippen gecombineerd met een nauwkeurige scheerbeurt voor een frisse, verzorgde look.",
-    price: "32.5",
-  },
-  {
-    name: "Heren Permanenten",
-    description:
-      "Geef je haar meer textuur en volume met een permanent, speciaal ontworpen voor heren.",
-    price: "70",
-  },
-  {
-    name: "Permanent + Knippen",
-    description:
-      "Krijg een complete look met een permanent en een frisse coupe - meer volume, textuur en direct perfect in model.",
-    price: "95",
-  },
-  {
-    name: "Contouren & baard Model scheren",
-    description:
-      "Strakke lijnen en perfect gevormde baard. We verzorgen je contouren en brengen je baard in model voor een verzorgde, frisse look.",
-    price: "15",
-  },
-  {
-    name: "Model Knippen vrouwen",
-    description:
-      "Een verzorgde coupe die past bij jouw gezichtsvorm en haartype, met aandacht voor detail en natuurlijk resultaat.",
-    price: "25",
-  },
-  {
-    name: "Wassen, knippen en drogen vrouwen",
-    description:
-      "Geniet van een complete behandeling waarbij je haar wordt gewassen, in model geknipt en mooi gedroogd voor een frisse en verzorgde uitstraling.",
-    price: "30",
-  },
-  {
-    name: "Wassen, knippen, Model f\u00F6hnen vrouwen",
-    description:
-      "Volledige verzorging van je haar: wassen, precies knippen en professioneel f\u00F6hnen voor een mooi vallend en verzorgd resultaat.",
-    price: "35",
-  },
-  {
-    name: "Verven v.a.",
-    description:
-      "Geef je haar een nieuwe kleur of fris je huidige tint op met professionele haarkleuring, afgestemd op jouw wensen.",
-    price: "30",
-  },
-  {
-    name: "Highlights v.a.",
-    description:
-      "Breng diepte en dimensie in je haar met subtiele of opvallende highlights, zorgvuldig aangebracht voor een natuurlijk resultaat.",
-    price: "35",
-  },
-  {
-    name: "Haren krullen",
-    description:
-      "Cre\u00EBer mooie, veerkrachtige krullen die volume en vorm geven aan je haar, perfect afgestemd op jouw stijl.",
-    price: "22.5",
-  },
-  {
-    name: "Haren stylen",
-    description:
-      "Laat je haar stralen met professioneel stylen voor een verzorgd en passend resultaat, klaar voor elke gelegenheid.",
-    price: "19.5",
-  },
+import type React from "react"
+import Image from "next/image"
+import {
+  Scissors,
+  Gem,
+  Stars,
+  Water,
+  Lightning,
+  PencilSquare,
+  Droplet,
+  Wind,
+  Palette,
+  CircleFill,
+  Brush,
+} from "react-bootstrap-icons"
+import type { Locale } from "@/lib/i18n"
+import { messages, servicesMen, servicesWomen } from "@/lib/i18n/messages"
+
+const menIcons = [Scissors, Gem, Stars, Water, Lightning, PencilSquare]
+const menPrices = ["25", "40", "32.5", "70", "95", "15"]
+const menImages = [
+  "/images/diensten/model-knippen.png",
+  "/images/diensten/heren-vip.png",
+  "/images/diensten/model-knippen-baard.png",
+  "/images/diensten/heren-permanenten.jpeg",
+  "/images/diensten/permanent-knippen.png",
+  "/images/diensten/contouren-baard.png",
 ]
 
-function ServiceItem({
+const womenIcons = [Scissors, Droplet, Wind, Palette, CircleFill, Water, Brush]
+const womenPrices = ["25", "30", "35", "30", "35", "22.5", "19.5"]
+const womenImages = [
+  "/images/diensten/model-knippen-vrouwen.png",
+  "/images/diensten/wassen-knippen-drogen.png",
+  "/images/diensten/wassen-knippen-fohnen.png",
+  "/images/diensten/verven.png",
+  "/images/diensten/highlights.png",
+  "/images/diensten/haren-krullen.png",
+  "/images/diensten/haren-stylen.png",
+]
+
+function getDienstenHeren(locale: Locale) {
+  const texts = servicesMen[locale]
+  return texts.map((t, i) => ({
+    ...t,
+    price: menPrices[i],
+    icon: menIcons[i],
+    image: menImages[i],
+  }))
+}
+
+function getDienstenDames(locale: Locale) {
+  const texts = servicesWomen[locale]
+  return texts.map((t, i) => ({
+    ...t,
+    price: womenPrices[i],
+    icon: womenIcons[i],
+    image: womenImages[i],
+  }))
+}
+
+function ServiceCard({
   name,
   description,
   price,
+  priceFrom,
+  icon: Icon,
+  image,
+  priceFromLabel,
 }: {
   name: string
   description: string
   price: string
+  priceFrom?: boolean
+  icon: React.ComponentType<{ className?: string }>
+  image?: string
+  priceFromLabel?: string
 }) {
   return (
-    <div className="group border-b border-border/60 py-7 last:border-b-0">
-      <div className="flex items-baseline justify-between gap-6">
-        <h3 className="text-base font-semibold text-foreground md:text-lg">
-          {name}
-        </h3>
-        <div className="flex shrink-0 items-baseline gap-1">
-          <span className="font-serif text-2xl font-normal text-foreground md:text-3xl">
-            {"\u20AC"}{price}
+    <article className="group flex flex-col overflow-hidden rounded-md border border-border bg-background/60 transition-all duration-200 hover:border-foreground/25 hover:bg-background/80">
+      {image ? (
+        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted/20">
+          <Image
+            src={image}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+          />
+        </div>
+      ) : (
+        <div className="flex aspect-[4/3] w-full items-center justify-center border-b border-border bg-muted/20">
+          <Icon className="h-10 w-10 text-muted-foreground sm:h-12 sm:w-12" />
+        </div>
+      )}
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">{name}</h3>
+          <span className="shrink-0 text-right">
+            {priceFrom && priceFromLabel && (
+              <span className="mr-1 text-[10px] font-normal uppercase tracking-wider text-muted-foreground sm:text-xs">
+                {priceFromLabel}{" "}
+              </span>
+            )}
+            <span className="font-serif text-xl text-foreground sm:text-2xl">€{price}</span>
           </span>
         </div>
+        <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground sm:text-[15px]">
+          {description}
+        </p>
       </div>
-      <p className="mt-2 max-w-2xl text-[13px] leading-[1.7] text-muted-foreground">
-        {description}
-      </p>
-    </div>
+    </article>
   )
 }
 
-export function Services() {
-  return (
-    <section id="our-menu" className="border-t border-border bg-card py-24 lg:py-32">
-      <div className="mx-auto max-w-4xl px-6 lg:px-10">
-        {/* Section header */}
-        <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-          Aanbevolen diensten
-        </p>
-        <h2 className="mt-6 font-serif text-4xl font-normal leading-[1.15] text-foreground md:text-5xl lg:text-6xl text-balance">
-          Dit is waar wij
-          <br />
-          de beste in zijn
-        </h2>
+export function Services({ locale = "nl" }: { locale?: Locale }) {
+  const t = messages[locale].services
+  const dienstenHeren = getDienstenHeren(locale)
+  const dienstenDames = getDienstenDames(locale)
+  const waxingHref = locale === "en" ? "/en/a-waxing" : "/a-waxing"
 
-        {/* Services list */}
-        <div className="mt-16">
-          {diensten.map((dienst) => (
-            <ServiceItem key={dienst.name} {...dienst} />
-          ))}
+  return (
+    <section id="services" className="border-t border-border bg-card py-12 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground sm:text-xs sm:tracking-[0.3em]">
+          {t.overline}
+        </p>
+        <h2 className="mt-3 font-serif text-2xl font-normal leading-[1.15] text-foreground sm:mt-6 sm:text-4xl md:text-5xl lg:text-6xl text-balance">
+          {t.title}
+        </h2>
+        <p className="mt-3 text-[13px] text-muted-foreground sm:mt-5 sm:text-[15px]">
+          {t.subtitle}
+        </p>
+
+        <div className="mt-12 sm:mt-16 lg:mt-20">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground sm:text-sm">
+            {t.heren}
+          </h3>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {dienstenHeren.map((dienst) => (
+              <ServiceCard key={dienst.name} {...dienst} />
+            ))}
+          </div>
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 flex justify-center">
+        <div className="mt-14 border-t border-border/60 pt-14 sm:mt-20 sm:pt-20 lg:mt-24 lg:pt-24">
+          <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground sm:text-sm">
+            {t.dames}
+          </h3>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {dienstenDames.map((dienst) => (
+              <ServiceCard
+                key={dienst.name}
+                {...dienst}
+                priceFromLabel={dienst.priceFrom ? t.priceFrom : undefined}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center gap-3 sm:mt-12 sm:gap-4">
           <a
             href="#footer"
-            className="border border-foreground px-12 py-4 text-[13px] font-medium uppercase tracking-[0.2em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            className="inline-flex min-h-11 min-w-[180px] items-center justify-center border border-foreground px-8 py-3 text-[11px] font-medium uppercase tracking-[0.18em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background sm:min-h-12 sm:min-w-[200px] sm:px-10 sm:py-3.5 sm:text-[12px] sm:tracking-[0.2em]"
           >
-            Maak een Afspraak
+            {t.maakAfspraak}
+          </a>
+          <a
+            href={waxingHref}
+            className="text-[12px] text-muted-foreground transition-colors hover:text-foreground sm:text-[13px]"
+          >
+            {t.waxing} →
           </a>
         </div>
       </div>

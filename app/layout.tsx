@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { siteConfig } from "@/lib/site-config"
-import { AppointmentWidget } from "@/components/appointment-widget"
 import "./globals.css"
 
 const inter = Inter({
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
     "baard",
     "trimmen",
     "premium kapper",
-    "Sherwany Studio",
+    "Sherwany Barbershop & Studio",
   ],
   authors: [{ name: siteConfig.name, url: siteUrl }],
   creator: siteConfig.name,
@@ -92,6 +91,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   alternates: {
     canonical: siteUrl,
+    languages: { nl: siteUrl, en: `${siteUrl}/en` },
   },
   category: "business",
 }
@@ -137,14 +137,14 @@ function JsonLdSchemas() {
     ),
     sameAs: [
       siteConfig.business.social.instagram,
-      siteConfig.business.social.facebook,
+      siteConfig.business.social.whatsapp,
     ],
     potentialAction: {
       "@type": "ReserveAction",
-      target: siteConfig.business.bookingUrl,
+      target: `${siteUrl}/contact`,
       result: {
         "@type": "Reservation",
-        name: "Afspraak maken bij Sherwany Studio",
+        name: "Afspraak maken bij Sherwany Barbershop & Studio",
       },
     },
   }
@@ -176,19 +176,13 @@ export default function RootLayout({
   return (
     <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
       <head>
+        <link rel="dns-prefetch" href="https://app.cal.com" />
         <link rel="dns-prefetch" href="https://cal.com" />
         <link rel="dns-prefetch" href="https://www.instagram.com" />
       </head>
       <body className="font-sans antialiased">
-        <a
-          href="#main-content"
-          className="absolute left-4 top-4 z-[100] -translate-y-full rounded bg-foreground px-4 py-2 text-background transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          Naar inhoud
-        </a>
         <JsonLdSchemas />
         {children}
-        <AppointmentWidget />
         <Analytics />
       </body>
     </html>

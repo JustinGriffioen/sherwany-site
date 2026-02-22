@@ -1,66 +1,241 @@
-import { Star } from "lucide-react"
+import Image from "next/image"
+import { StarFill, Star, Instagram, Wallet2, Heart, Award } from "react-bootstrap-icons"
+import { siteConfig } from "@/lib/site-config"
+import { fetchGooglePlaceData } from "@/lib/google-places"
+import type { Locale } from "@/lib/i18n"
+import { messages } from "@/lib/i18n/messages"
 
-export function Testimonials() {
+const badrTestimonialImage = "/images/badr-testimonial.jpg"
+const instagramPreviewImages = [
+  "/images/gallery-1.jpg",
+  "/images/gallery/img-7567.png",
+  "/images/gallery/img-7574.png",
+]
+
+function Stars({ count }: { count: number }) {
   return (
-    <section id="reviews" className="border-t border-border bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <div className="flex gap-0.5 sm:gap-1">
+      {[...Array(5)].map((_, i) =>
+        i < count ? (
+          <StarFill
+            key={i}
+            className="h-3 w-3 fill-foreground text-foreground sm:h-4 sm:w-4"
+          />
+        ) : (
+          <Star
+            key={i}
+            className="h-3 w-3 fill-muted/30 text-muted-foreground/30 sm:h-4 sm:w-4"
+          />
+        )
+      )}
+    </div>
+  )
+}
+
+function TestimonialCard({
+  text,
+  author,
+  location,
+  rating,
+  reviewUrl,
+  viewOnGoogleLabel,
+}: {
+  text: string
+  author: string
+  location?: string
+  rating: number
+  reviewUrl?: string
+  viewOnGoogleLabel?: string
+}) {
+  const content = (
+    <>
+      <Stars count={rating} />
+      <blockquote className="mt-2 font-serif text-[11px] font-normal italic leading-[1.6] text-foreground sm:mt-6 sm:text-lg sm:leading-[1.7] md:text-xl">
+        &quot;{text}&quot;
+      </blockquote>
+      <div className="mt-4 border-t border-border pt-3 sm:mt-8 sm:pt-6">
+        <p className="text-[11px] font-semibold text-foreground sm:text-sm">{author}</p>
+        {location && (
+          <p className="mt-0.5 text-[10px] text-muted-foreground sm:mt-1 sm:text-xs">
+            {location}
+            {reviewUrl && viewOnGoogleLabel && (
+              <> · <span className="text-foreground/80">{viewOnGoogleLabel}</span></>
+            )}
+          </p>
+        )}
+      </div>
+    </>
+  )
+
+  const className =
+    "flex min-w-0 flex-col justify-center border border-border bg-card p-3 sm:p-8 md:p-10 lg:min-w-[280px] lg:basis-[280px] lg:p-12 transition-colors hover:border-foreground/20"
+
+  if (reviewUrl) {
+    return (
+      <a
+        href={reviewUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`block ${className} hover:bg-card/80`}
+      >
+        {content}
+      </a>
+    )
+  }
+
+  return <div className={className}>{content}</div>
+}
+
+export async function Testimonials({ locale = "nl" }: { locale?: Locale }) {
+  const t = messages[locale].testimonials
+  let googleData = { reviews: [] as { author: string; rating: number; text: string; relativeTime: string }[] }
+  try {
+    if (process.env.GOOGLE_PLACES_API_KEY) {
+      googleData = await fetchGooglePlaceData({
+        placeId: siteConfig.business.googlePlaceId ?? undefined,
+        searchQuery: "Sherwany barbershop A-Salon Deventer",
+        locationBias: {
+          lat: siteConfig.business.geo.latitude,
+          lng: siteConfig.business.geo.longitude,
+        },
+      })
+    }
+  } catch {
+    // Fallback: show only hardcoded reviews
+  }
+
+  const googleReviews = googleData.reviews.slice(0, 5).map((r) => ({
+    text: r.text,
+    author: r.author,
+    location: r.relativeTime ? `Google · ${r.relativeTime}` : "Google",
+    rating: r.rating,
+  }))
+  const fallbackReviews = t.hardcoded.map((review) => ({
+    text: review.text,
+    author: review.author,
+    location: review.location,
+    rating: 5,
+  }))
+  const allReviews = googleReviews.length > 0 ? googleReviews : fallbackReviews
+
+  return (
+    <section id="reviews" className="border-t border-border bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-          Over ons
+          {t.overline}
         </p>
 
-        <h2 className="mt-6 font-serif text-4xl font-normal leading-[1.15] text-foreground md:text-5xl lg:text-6xl text-balance">
-          Wat onze klanten
+        <h2 className="mt-4 font-serif text-3xl font-normal leading-[1.15] text-foreground sm:mt-6 sm:text-4xl md:text-5xl lg:text-6xl text-balance">
+          {t.title}
           <br />
-          van ons denken
+          {t.titleLine2}
         </h2>
+        <a
+          href={siteConfig.business.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex items-center gap-2 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {t.bekijkGoogle}
+        </a>
 
-        {/* Testimonial card */}
-        <div className="mt-16 border border-border bg-card p-8 md:p-12 lg:p-16">
-          <div className="flex gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star
+        {/* Badr testimonial image + Testimonials + Instagram row */}
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-12 lg:gap-8">
+          {/* Badr testimonial photo */}
+          <div className="relative aspect-square overflow-hidden border border-border bg-card sm:aspect-[3/4] lg:col-span-4">
+            <Image
+              src={badrTestimonialImage}
+              alt={locale === "en" ? "Badr Belarbi – customer at Sherwany Barbershop" : "Badr Belarbi – klant bij Sherwany Barbershop"}
+              fill
+              sizes="(max-width: 1024px) 100vw, 33vw"
+              className="object-cover"
+            />
+          </div>
+
+          {/* Testimonials area */}
+          <div className="flex flex-col gap-3 overflow-visible sm:gap-6 lg:col-span-5">
+            {allReviews.slice(0, 3).map((review, i) => (
+              <TestimonialCard
                 key={i}
-                className="h-4 w-4 fill-foreground text-foreground"
+                {...review}
+                reviewUrl={siteConfig.business.mapsUrl}
+                viewOnGoogleLabel={t.bekijkReviewOpGoogle}
               />
             ))}
           </div>
-          <blockquote className="mt-8 max-w-3xl font-serif text-lg font-normal italic leading-[1.7] text-foreground md:text-xl lg:text-2xl">
-            {'"'}Ik ben meer dan tevreden met de service hier. De kapper was zeer
-            vakkundig en besteedde aandacht aan de details die ik had gevraagd.
-            De knipbeurt was precies zoals ik in gedachten had, de ervaring
-            voelde professioneel aan zonder dat het gehaast leek. Het resultaat
-            was netjes en goed. Zeker de moeite waard voor de kwaliteit van de
-            service.{'"'}
-          </blockquote>
-          <div className="mt-10 border-t border-border pt-8">
-            <p className="text-sm font-semibold text-foreground">
-              Badr Belarbi
+
+          {/* Instagram */}
+          <div className="flex flex-col justify-center border border-border bg-card p-4 sm:p-8 md:p-10 lg:col-span-3 lg:p-12">
+            <a
+              href={siteConfig.business.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-foreground transition-colors hover:text-muted-foreground"
+            >
+              <Instagram className="h-5 w-5" />
+              <span className="text-sm font-semibold">@sherwanybarbershop</span>
+            </a>
+            <p className="mt-2 text-[13px] text-muted-foreground">
+              {t.volgOns}
             </p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Deventer, Nederland
-            </p>
+            <div className="mt-6 grid grid-cols-3 gap-2">
+              {instagramPreviewImages.map((src, i) => (
+                <a
+                  key={src}
+                  href={siteConfig.business.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative aspect-square overflow-hidden rounded-sm opacity-90 transition-opacity hover:opacity-100"
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    sizes="80px"
+                    className="object-cover"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Feature highlights - 3 columns */}
-        <div className="mt-12 grid grid-cols-1 gap-0 border border-border md:grid-cols-3">
+        {/* Feature highlights */}
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:mt-16 sm:grid-cols-3 sm:gap-8 lg:gap-12">
           {[
-            { title: "Uitstekende prijzen", number: "01" },
-            { title: "Gezellige sfeer", number: "02" },
-            { title: "Beste service kwaliteit", number: "03" },
-          ].map((feature, i) => (
+            {
+              title: t.features.prijzen,
+              icon: Wallet2,
+              description: t.features.prijzenDesc,
+            },
+            {
+              title: t.features.sfeer,
+              icon: Heart,
+              description: t.features.sfeerDesc,
+            },
+            {
+              title: t.features.kwaliteit,
+              icon: Award,
+              description: t.features.kwaliteitDesc,
+            },
+          ].map(({ title, icon: Icon, description }) => (
             <div
-              key={feature.title}
-              className={`flex flex-col justify-between bg-card p-8 lg:p-10 ${
-                i < 2 ? "border-b border-border md:border-b-0 md:border-r" : ""
-              }`}
+              key={title}
+              className="group flex flex-col gap-5 rounded-lg border border-border bg-card p-6 transition-colors hover:border-foreground/10 hover:bg-muted/20 sm:p-8 lg:gap-6 lg:p-10"
             >
-              <span className="text-xs text-muted-foreground">
-                {feature.number}
-              </span>
-              <p className="mt-10 text-base font-semibold text-foreground">
-                {feature.title}
-              </p>
+              <div className="flex items-center gap-4">
+                <div className="rounded-full border border-border bg-muted/30 p-2 transition-colors group-hover:border-foreground/20 group-hover:bg-muted/50">
+                  <Icon className="h-4 w-4 text-muted-foreground sm:h-[18px] sm:w-[18px]" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-base font-semibold text-foreground sm:text-[17px]">
+                  {title}
+                </h3>
+                <p className="text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
+                  {description}
+                </p>
+              </div>
             </div>
           ))}
         </div>

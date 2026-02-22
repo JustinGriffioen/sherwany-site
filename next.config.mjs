@@ -14,6 +14,11 @@ const nextConfig = {
         headers: [
           { key: "X-DNS-Prefetch-Control", value: "on" },
           { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "frame-src 'self' https://cal.com https://app.cal.com https://*.cal.com https://maps.google.com https://www.google.com;",
+          },
         ],
       },
       {

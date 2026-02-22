@@ -3,7 +3,7 @@
  * Update NEXT_PUBLIC_SITE_URL in .env.local for production.
  */
 export const siteConfig = {
-  name: "Sherwany Studio",
+  name: "Sherwany Barbershop & Studio",
   tagline: "Waar traditie en innovatie samenkomen voor de perfecte uitstraling",
   description:
     "Premium barbershop en herenkapper in het hart van Deventer. Ervaring, vakmanschap en persoonlijke aandacht voor elke klant.",
@@ -23,9 +23,22 @@ export const siteConfig = {
       full: "Grote Overstraat 56, 7411 JD Deventer, Nederland",
     },
     geo: {
-      latitude: 52.2555,
-      longitude: 6.1636,
+      latitude: 52.2521794,
+      longitude: 6.1593413,
     },
+    mapsUrl:
+      "https://www.google.com/maps/place/Sherwany+barbershop+%2F+A-Salon/@52.2521432,6.1592218,20.79z",
+    /** Use Maps Embed API with satellite view when NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY is set. Otherwise uses classic embed. */
+    get mapsEmbedUrl() {
+      const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY
+      const { latitude, longitude } = this.geo
+      if (key) {
+        return `https://www.google.com/maps/embed/v1/view?key=${key}&center=${latitude},${longitude}&zoom=19&maptype=satellite`
+      }
+      return "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d305.3147141914615!2d6.1592218!3d52.2521432!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c7eb3af5eba181%3A0xe1b1659a218f4e0a!2sSherwany%20barbershop%20%2F%20A-Salon!5e0!3m2!1snl!2snl!4v1771790932718!5m2!1snl!2snl&maptype=satellite"
+    },
+    /** Google Place ID for photos & reviews. Optional; falls back to Text Search. */
+    googlePlaceId: null as string | null,
     phone: "+31630120257",
     email: "sherwany_@outlook.com",
     openingHours: [
@@ -36,9 +49,7 @@ export const siteConfig = {
     ],
     social: {
       instagram: "https://www.instagram.com/sherwanybarbershop/",
-      facebook: "https://facebook.com/sherwanystudio",
       whatsapp: "https://wa.me/31630120257",
     },
-    bookingUrl: "https://cal.com/sherwanystudio/sherwany-studio",
   },
 } as const

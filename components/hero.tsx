@@ -1,107 +1,86 @@
 import Image from "next/image"
-import { MapPin, Clock, Phone, Mail } from "lucide-react"
+import type { Locale } from "@/lib/i18n"
+import { messages } from "@/lib/i18n/messages"
 
-export function Hero() {
+const heroImages = [
+  { src: "/images/sherwany-barber.jpg", alt: "Sherwany barbershop interieur" },
+  { src: "/images/haircut-in-action.jpg", alt: "Knippen in actie" },
+  { src: "/images/gallery-1.jpg", alt: "Knippen en styling" },
+  { src: "/images/gallery-2.jpg", alt: "Baard trimmen en verzorging" },
+  { src: "/images/gallery/img-7564.png", alt: "Klant in stoel" },
+  { src: "/images/gallery/img-7574.png", alt: "Afgewerkt resultaat" },
+  { src: "/images/gallery/img-7565.png", alt: "Sherwany Studio sfeer" },
+  { src: "/images/sherwany-black-white.jpg", alt: "Indruk van de zaak" },
+  { src: "/images/interior.jpg", alt: "Interieur Sherwany barbershop" },
+  { src: "/images/gallery/img-7567.png", alt: "Sfeer in de zaak" },
+]
+
+const floatStyles = [
+  "top-[18%] left-[2%] w-11 sm:w-20 md:w-24 lg:w-28 rotate-[-10deg] z-[1]",
+  "top-[16%] right-[3%] w-10 sm:w-18 md:w-22 lg:w-26 rotate-[8deg] z-[2]",
+  "top-[32%] left-[1%] w-10 sm:w-16 md:w-20 lg:w-24 rotate-[-6deg] hidden sm:block z-[1]",
+  "top-[48%] right-[2%] w-11 sm:w-18 md:w-24 lg:w-28 rotate-[10deg] hidden sm:block z-[2]",
+  "bottom-[12%] left-[4%] w-10 sm:w-16 md:w-20 lg:w-24 rotate-[5deg] z-[1]",
+  "top-[42%] left-[6%] w-9 sm:w-14 md:w-18 lg:w-20 rotate-[-4deg] hidden md:block z-[1]",
+  "bottom-[8%] right-[6%] w-9 sm:w-14 md:w-18 lg:w-22 rotate-[6deg] hidden sm:block z-[2]",
+  "top-[24%] right-[12%] w-8 sm:w-12 md:w-16 lg:w-18 rotate-[3deg] hidden lg:block z-[1]",
+  "top-[36%] right-[8%] w-9 sm:w-14 md:w-18 lg:w-20 rotate-[-5deg] hidden sm:block z-[1]",
+  "top-[22%] right-[4%] w-10 sm:w-16 md:w-20 lg:w-24 rotate-[6deg] hidden md:block z-[2]",
+]
+
+export function Hero({ locale = "nl" }: { locale?: Locale }) {
+  const t = messages[locale].hero
   return (
-    <section id="home" className="relative min-h-screen">
-      {/* Background image - barbershop interior/space, not the barber */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/gallery-2.jpg"
-          alt="Sherwany Studio barbershop interieur - kapsalon Deventer"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-          fetchPriority="high"
-        />
-        <div className="absolute inset-0 bg-background/75" />
+    <section id="home" className="relative min-h-screen overflow-hidden bg-black">
+      {/* Floating image cards - start below header to avoid overlap */}
+      <div className="pointer-events-none absolute inset-0 pt-20 sm:pt-24">
+        {heroImages.map((img, i) => (
+          <div
+            key={img.src}
+            className={`absolute ${floatStyles[i]} rounded-md border border-white/20 shadow-2xl shadow-black/50 transition-transform duration-300 hover:scale-105 hover:border-white/40 hover:z-10`}
+          >
+            <div className="relative aspect-[3/4] overflow-hidden">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                fill
+                sizes="(max-width: 640px) 80px, (max-width: 768px) 112px, 144px"
+                className="object-cover"
+                priority={i < 3}
+              />
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex min-h-screen flex-col">
-        {/* Main hero content - centered */}
-        <div className="flex flex-1 flex-col items-center justify-center px-6 pt-24 text-center">
+        <div className="flex flex-1 flex-col items-center justify-center px-4 pt-20 pb-6 text-center sm:px-6 sm:pt-24 sm:pb-0">
           <Image
             src="/images/logo.png"
-            alt="Sherwany Studio"
-            width={140}
-            height={140}
-            className="h-28 w-auto brightness-0 invert md:h-36"
+            alt="Sherwany Barbershop & Studio"
+            width={512}
+            height={512}
+            sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
+            className="h-14 w-auto brightness-0 invert sm:h-16 md:h-20"
           />
-          <h1 className="mt-8 font-serif text-5xl font-normal leading-[1.1] text-foreground sm:text-6xl md:text-7xl lg:text-8xl text-balance">
-            Welkom bij
+          <p className="mt-6 text-xs font-medium uppercase tracking-[0.3em] text-white/60 sm:mt-8">
+            {t.overline}
+          </p>
+          <h1 className="mt-3 font-serif text-4xl font-normal leading-[1.1] text-white sm:text-5xl md:text-7xl lg:text-8xl text-balance">
+            {t.title}
             <br />
-            Sherwany Studio
+            {t.titleLine2}
           </h1>
-          <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            waar traditie en innovatie samenkomen voor de perfecte uitstraling.
+          <p className="mt-4 max-w-md text-[14px] leading-relaxed text-white/70 sm:mt-6 sm:text-[15px]">
+            {t.description}
           </p>
           <a
-            href="#our-menu"
-            className="mt-10 border border-foreground px-10 py-4 text-[13px] font-medium uppercase tracking-[0.2em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            href={locale === "en" ? "/en/contact" : "/contact"}
+            className="mt-8 inline-flex min-h-12 items-center justify-center border border-white px-8 py-3.5 text-[12px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-white hover:text-black sm:mt-10 sm:px-10 sm:py-4 sm:text-[13px]"
           >
-            Maak een afspraak
+            {t.cta}
           </a>
-        </div>
-
-        {/* Bottom info bar */}
-        <div className="border-t border-border/40 bg-background/40 backdrop-blur-sm">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-border/40 md:grid-cols-3 md:divide-x md:divide-y-0">
-            {/* Location */}
-            <div className="flex items-start gap-4 px-8 py-7 lg:px-10">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-              <div>
-                <h3 className="text-sm font-semibold text-foreground">
-                  Vind ons
-                </h3>
-                <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-                  Grote Overstraat 56, Deventer, 7411 JD
-                </p>
-              </div>
-            </div>
-
-            {/* Hours */}
-            <div className="flex items-start gap-4 px-8 py-7 lg:px-10">
-              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-              <div>
-                <h3 className="text-sm font-semibold text-foreground">
-                  Openingstijden
-                </h3>
-                <div className="mt-1.5 space-y-0.5 text-[13px] leading-relaxed text-muted-foreground">
-                  <p>Dinsdag t/m Donderdag 9:00 - 18:00</p>
-                  <p>Vrijdag 9:00 - 20:00</p>
-                  <p>Zaterdag 9:00 - 18:00</p>
-                  <p>Zondag 11:00 - 17:00</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div className="flex items-start gap-4 px-8 py-7 lg:px-10">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-              <div>
-                <h3 className="text-sm font-semibold text-foreground">
-                  Contact
-                </h3>
-                <div className="mt-1.5 flex flex-col gap-1">
-                  <a
-                    href="tel:+31630120257"
-                    className="flex items-center gap-2 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <span>+31 6 30120257</span>
-                  </a>
-                  <a
-                    href="mailto:sherwany_@outlook.com"
-                    className="flex items-center gap-2 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Mail className="h-3 w-3" />
-                    <span>sherwany_@outlook.com</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
