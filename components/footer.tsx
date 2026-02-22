@@ -162,13 +162,7 @@ export function Footer({
           </div>
         </div>
 
-        <div className="mt-16 border-t border-border pt-8 flex flex-col items-center gap-2">
-          <Link
-            href={prefix ? `${prefix}/privacy` : "/privacy"}
-            className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground"
-          >
-            Privacy
-          </Link>
+        <div className="mt-16 border-t border-border pt-8">
           <p className="text-center text-xs leading-relaxed text-muted-foreground">
             {t.disclaimer}
           </p>
