@@ -5,7 +5,7 @@ export const messages = {
     nav: {
       overOns: "Over ons",
       barbier: "Barbier",
-      harsen: "Harsen",
+      harsen: "Waxing",
       taal: "Taal",
       prijzen: "Prijzen",
       contact: "Contact",
@@ -105,6 +105,11 @@ export const messages = {
       title: "Wij zijn de beste",
       titleLine2: "in wat we doen.",
       description: "Kom het zelf zien!",
+    },
+    instagram: {
+      overline: "Instagram",
+      title: "@sherwanybarbershop",
+      description: "Volg ons voor de nieuwste looks",
     },
     footer: {
       overOns: "Over ons",
@@ -257,6 +262,11 @@ export const messages = {
       title: "We are the best",
       titleLine2: "at what we do.",
       description: "Come see for yourself!",
+    },
+    instagram: {
+      overline: "Instagram",
+      title: "@sherwanybarbershop",
+      description: "Follow us for the latest looks",
     },
     footer: {
       overOns: "About us",

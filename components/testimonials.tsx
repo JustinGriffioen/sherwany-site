@@ -1,16 +1,11 @@
 import Image from "next/image"
-import { StarFill, Star, Instagram, Wallet2, Heart, Award } from "react-bootstrap-icons"
+import { StarFill, Star, Wallet2, Heart, Award } from "react-bootstrap-icons"
 import { siteConfig } from "@/lib/site-config"
 import { fetchGooglePlaceData } from "@/lib/google-places"
 import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
 
 const badrTestimonialImage = "/images/badr-testimonial.jpg"
-const instagramPreviewImages = [
-  "/images/gallery-1.jpg",
-  "/images/gallery/img-7567.png",
-  "/images/gallery/img-7574.png",
-]
 
 function Stars({ count }: { count: number }) {
   return (
@@ -139,21 +134,21 @@ export async function Testimonials({ locale = "nl" }: { locale?: Locale }) {
           {t.bekijkGoogle}
         </a>
 
-        {/* Badr testimonial image + Testimonials + Instagram row */}
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:grid-cols-12 lg:gap-8">
+        {/* Badr testimonial image + Testimonials */}
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
           {/* Badr testimonial photo */}
-          <div className="relative aspect-square overflow-hidden border border-border bg-card sm:aspect-[3/4] lg:col-span-4">
+          <div className="relative aspect-square overflow-hidden border border-border bg-card sm:aspect-[3/4]">
             <Image
               src={badrTestimonialImage}
               alt={locale === "en" ? "Badr Belarbi – customer at Sherwany Barbershop" : "Badr Belarbi – klant bij Sherwany Barbershop"}
               fill
-              sizes="(max-width: 1024px) 100vw, 33vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover"
             />
           </div>
 
           {/* Testimonials area */}
-          <div className="flex flex-col gap-3 overflow-visible sm:gap-6 lg:col-span-5">
+          <div className="flex flex-col gap-3 overflow-visible sm:col-span-2 sm:gap-6">
             {allReviews.slice(0, 3).map((review, i) => (
               <TestimonialCard
                 key={i}
@@ -162,41 +157,6 @@ export async function Testimonials({ locale = "nl" }: { locale?: Locale }) {
                 viewOnGoogleLabel={t.bekijkReviewOpGoogle}
               />
             ))}
-          </div>
-
-          {/* Instagram */}
-          <div className="flex flex-col justify-center border border-border bg-card p-4 sm:p-8 md:p-10 lg:col-span-3 lg:p-12">
-            <a
-              href={siteConfig.business.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-2 text-foreground transition-colors hover:text-muted-foreground"
-            >
-              <Instagram className="h-5 w-5" />
-              <span className="text-sm font-semibold">@sherwanybarbershop</span>
-            </a>
-            <p className="mt-2 text-[13px] text-muted-foreground">
-              {t.volgOns}
-            </p>
-            <div className="mt-6 grid grid-cols-3 gap-2">
-              {instagramPreviewImages.map((src, i) => (
-                <a
-                  key={src}
-                  href={siteConfig.business.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative aspect-square overflow-hidden rounded-sm opacity-90 transition-opacity hover:opacity-100"
-                >
-                  <Image
-                    src={src}
-                    alt=""
-                    fill
-                    sizes="80px"
-                    className="object-cover"
-                  />
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 

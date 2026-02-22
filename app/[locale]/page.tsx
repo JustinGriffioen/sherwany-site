@@ -6,6 +6,7 @@ import { ContactInfo } from "@/components/contact-info"
 import { About } from "@/components/about"
 import { Services } from "@/components/services"
 import { Testimonials } from "@/components/testimonials"
+import { InstagramSection } from "@/components/instagram-section"
 import { Gallery } from "@/components/gallery"
 import { ContactCTA } from "@/components/contact-cta"
 import { Footer } from "@/components/footer"
@@ -53,10 +54,11 @@ export default async function Home({
     <main id="main-content" role="main" className="overflow-x-hidden">
       <Navigation />
       <Hero locale={validLocale} />
-      <ContactInfo locale={validLocale} />
       <About locale={validLocale} />
+      <ContactInfo locale={validLocale} />
       <Services locale={validLocale} />
       <Testimonials locale={validLocale} />
+      <InstagramSection locale={validLocale} />
       <Gallery locale={validLocale} />
       <ContactCTA locale={validLocale} />
       <Footer locale={validLocale} />
