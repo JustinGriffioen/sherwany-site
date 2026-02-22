@@ -116,7 +116,10 @@ export default async function AWaxingPage({ params }: Props) {
           </div>
         </section>
       </main>
-      <Footer locale={validLocale} />
+      <Footer
+        locale={validLocale}
+        bookingHref={validLocale === "en" ? "/en/contact" : "/contact"}
+      />
     </>
   )
 }

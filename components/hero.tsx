@@ -5,14 +5,14 @@ import { messages } from "@/lib/i18n/messages"
 const heroImages = [
   { src: "/images/sherwany-barber.jpg", alt: "Sherwany barbershop interieur" },
   { src: "/images/haircut-in-action.jpg", alt: "Knippen in actie" },
-  { src: "/images/gallery-1.jpg", alt: "Knippen en styling" },
-  { src: "/images/gallery-2.jpg", alt: "Baard trimmen en verzorging" },
-  { src: "/images/gallery/img-7564.png", alt: "Klant in stoel" },
-  { src: "/images/gallery/img-7574.png", alt: "Afgewerkt resultaat" },
-  { src: "/images/gallery/img-7565.png", alt: "Sherwany Studio sfeer" },
+  { src: "/images/knippen-styling.jpg", alt: "Knippen en styling" },
+  { src: "/images/baard-trimmen.jpg", alt: "Baard trimmen en verzorging" },
+  { src: "/images/gallery/klant-in-stoel.png", alt: "Klant in stoel" },
+  { src: "/images/gallery/afgewerkt-resultaat.png", alt: "Afgewerkt resultaat" },
+  { src: "/images/gallery/dames-knippen.png", alt: "Dames knippen bij Sherwany" },
   { src: "/images/sherwany-black-white.jpg", alt: "Indruk van de zaak" },
-  { src: "/images/interior.jpg", alt: "Interieur Sherwany barbershop" },
-  { src: "/images/gallery/img-7567.png", alt: "Sfeer in de zaak" },
+  { src: "/images/sherwany-outside.jpg", alt: "Sherwany barbershop gevel Deventer" },
+  { src: "/images/gallery/sfeer-in-zaak.png", alt: "Sfeer in de zaak" },
 ]
 
 const floatStyles = [
@@ -76,7 +76,7 @@ export function Hero({ locale = "nl" }: { locale?: Locale }) {
             {t.description}
           </p>
           <a
-            href={locale === "en" ? "/en/contact" : "/contact"}
+            href="#footer"
             className="mt-8 inline-flex min-h-12 items-center justify-center border border-white px-8 py-3.5 text-[12px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-white hover:text-black sm:mt-10 sm:px-10 sm:py-4 sm:text-[13px]"
           >
             {t.cta}

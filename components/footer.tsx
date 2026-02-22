@@ -5,12 +5,20 @@ import { siteConfig } from "@/lib/site-config"
 import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
 
-export function Footer({ locale = "nl" }: { locale?: Locale }) {
+export function Footer({
+  locale = "nl",
+  bookingHref,
+}: {
+  locale?: Locale
+  /** Where "Maak afspraak" links to. Use "#footer" on home/contact, or "/contact#footer" on other pages. */
+  bookingHref?: string
+}) {
   const { business } = siteConfig
   const t = messages[locale].footer
   const prefix = locale === "en" ? "/en" : ""
   const homeHref = prefix || "/"
   const contactHref = prefix ? `${prefix}/contact` : "/contact"
+  const maakAfspraakHref = bookingHref ?? `${contactHref}#footer`
   const hours = messages[locale].openingHours
 
   return (
@@ -65,7 +73,7 @@ export function Footer({ locale = "nl" }: { locale?: Locale }) {
               </Link>
             </nav>
             <Link
-              href={`${contactHref}#footer`}
+              href={maakAfspraakHref}
               className="mt-2 inline-flex w-fit items-center justify-center border border-foreground bg-foreground px-5 py-2.5 text-[12px] font-medium uppercase tracking-[0.15em] text-background transition-colors hover:bg-transparent hover:text-foreground"
             >
               {t.maakAfspraak}
@@ -154,7 +162,13 @@ export function Footer({ locale = "nl" }: { locale?: Locale }) {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-border pt-8">
+        <div className="mt-16 border-t border-border pt-8 flex flex-col items-center gap-2">
+          <Link
+            href={prefix ? `${prefix}/privacy` : "/privacy"}
+            className="text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground"
+          >
+            Privacy
+          </Link>
           <p className="text-center text-xs leading-relaxed text-muted-foreground">
             {t.disclaimer}
           </p>

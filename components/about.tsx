@@ -4,12 +4,11 @@ import { siteConfig } from "@/lib/site-config"
 import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
 
-export function About({ locale = "nl" }: { locale?: Locale }) {
+export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
   const t = messages[locale].about
   return (
     <section id="over-ons" className="border-t border-border bg-card py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        {/* Over ons / De shop – first */}
         <div className="grid grid-cols-2 items-start gap-3 sm:gap-16 lg:gap-20">
           <div className="relative min-h-[280px] sm:min-h-[360px]">
             <div className="grid grid-cols-6 grid-rows-6 gap-2 sm:gap-3">
@@ -26,12 +25,12 @@ export function About({ locale = "nl" }: { locale?: Locale }) {
                 />
               </div>
             </div>
-            {/* Card 2 - smaller, top right - interior from Google Maps */}
+            {/* Card 2 - smaller, top right - exterior Deventer */}
             <div className="col-span-2 col-start-5 row-span-3 overflow-hidden rounded-lg border border-border shadow-md">
               <div className="relative aspect-[3/4] w-full">
                 <Image
-                  src="/images/interior.jpg"
-                  alt="Interieur Sherwany Barbershop & Studio – hoe het er binnen uitziet"
+                  src="/images/sherwany-outside.jpg"
+                  alt={locale === "en" ? "Sherwany Barbershop & Studio – storefront in Deventer" : "Sherwany Barbershop & Studio – gevel in Deventer"}
                   fill
                   sizes="(max-width: 1024px) 30vw, 15vw"
                   loading="lazy"
@@ -43,7 +42,7 @@ export function About({ locale = "nl" }: { locale?: Locale }) {
             <div className="col-span-2 col-start-5 row-span-3 row-start-4 overflow-hidden rounded-lg border border-border shadow-md">
               <div className="relative aspect-[3/4] w-full">
                 <Image
-                  src="/images/gallery-2.jpg"
+                  src="/images/baard-trimmen.jpg"
                   alt="Sfeer bij Sherwany Barbershop"
                   fill
                   sizes="(max-width: 1024px) 30vw, 15vw"
@@ -56,7 +55,7 @@ export function About({ locale = "nl" }: { locale?: Locale }) {
             <div className="col-span-2 col-start-3 row-span-2 row-start-5 overflow-hidden rounded-lg border border-border shadow-md">
               <div className="relative aspect-square w-full">
                 <Image
-                  src="/images/gallery/img-7567.png"
+                  src="/images/gallery/sfeer-in-zaak.png"
                   alt="Klant bij Sherwany"
                   fill
                   sizes="(max-width: 1024px) 30vw, 12vw"
@@ -117,9 +116,17 @@ export function About({ locale = "nl" }: { locale?: Locale }) {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  )
+}
 
-        {/* Barbier – second */}
-        <div id="team" className="mt-12 grid grid-cols-2 items-start gap-3 sm:mt-24 sm:gap-16 lg:mt-32 lg:gap-20">
+export function AboutTeam({ locale = "nl" }: { locale?: Locale }) {
+  const t = messages[locale].about
+  return (
+    <section id="team" className="border-t border-border bg-card py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div className="grid grid-cols-2 items-start gap-3 sm:gap-16 lg:gap-20">
           <div className="relative order-2 aspect-square overflow-hidden sm:aspect-[4/5]">
             <Image
               src="/images/sherwany-barber.jpg"

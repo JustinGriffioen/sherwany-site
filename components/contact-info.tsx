@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Clock, Telephone, Envelope, BoxArrowUpRight } from "react-bootstrap-icons"
 import { siteConfig } from "@/lib/site-config"
 import type { Locale } from "@/lib/i18n"
@@ -27,6 +28,24 @@ export function ContactInfo({ locale = "nl" }: { locale?: Locale }) {
             {t.description}
           </p>
         </div>
+
+        {/* Exterior image */}
+        <a
+          href={business.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-10 block overflow-hidden rounded-lg border border-border sm:mt-12"
+        >
+          <div className="relative aspect-[21/9] w-full">
+            <Image
+              src="/images/sherwany-outside.jpg"
+              alt={locale === "en" ? "Sherwany Barbershop & Studio – storefront in Deventer, Grote Overstraat" : "Sherwany Barbershop & Studio – gevel in Deventer, Grote Overstraat"}
+              fill
+              sizes="(max-width: 1024px) 100vw, 1280px"
+              className="object-cover"
+            />
+          </div>
+        </a>
 
         {/* Info cards */}
         <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
@@ -105,7 +124,7 @@ export function ContactInfo({ locale = "nl" }: { locale?: Locale }) {
 
         <div className="mt-6 flex justify-center sm:mt-8">
         <Link
-          href={locale === "en" ? "/en/contact#footer" : "/contact#footer"}
+          href="#footer"
           className="inline-flex items-center gap-2 text-[14px] text-muted-foreground transition-colors hover:text-foreground"
         >
           {t.maakAfspraak}

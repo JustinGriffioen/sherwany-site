@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/i18n"
 import { Navigation } from "@/components/navigation"
 import { Hero } from "@/components/hero"
 import { ContactInfo } from "@/components/contact-info"
-import { About } from "@/components/about"
+import { AboutIntro, AboutTeam } from "@/components/about"
 import { Services } from "@/components/services"
 import { Testimonials } from "@/components/testimonials"
 import { InstagramSection } from "@/components/instagram-section"
@@ -54,14 +54,15 @@ export default async function Home({
     <main id="main-content" role="main" className="overflow-x-hidden">
       <Navigation />
       <Hero locale={validLocale} />
-      <About locale={validLocale} />
+      <AboutIntro locale={validLocale} />
       <ContactInfo locale={validLocale} />
+      <AboutTeam locale={validLocale} />
       <Services locale={validLocale} />
       <Testimonials locale={validLocale} />
       <InstagramSection locale={validLocale} />
       <Gallery locale={validLocale} />
       <ContactCTA locale={validLocale} />
-      <Footer locale={validLocale} />
+      <Footer locale={validLocale} bookingHref="#footer" />
     </main>
   )
 }

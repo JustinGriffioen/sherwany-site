@@ -34,6 +34,8 @@ function TestimonialCard({
   rating,
   reviewUrl,
   viewOnGoogleLabel,
+  image,
+  imageAlt,
 }: {
   text: string
   author: string
@@ -41,29 +43,44 @@ function TestimonialCard({
   rating: number
   reviewUrl?: string
   viewOnGoogleLabel?: string
+  image?: string
+  imageAlt?: string
 }) {
   const content = (
     <>
-      <Stars count={rating} />
-      <blockquote className="mt-2 font-serif text-[11px] font-normal italic leading-[1.6] text-foreground sm:mt-6 sm:text-lg sm:leading-[1.7] md:text-xl">
-        &quot;{text}&quot;
-      </blockquote>
-      <div className="mt-4 border-t border-border pt-3 sm:mt-8 sm:pt-6">
-        <p className="text-[11px] font-semibold text-foreground sm:text-sm">{author}</p>
-        {location && (
-          <p className="mt-0.5 text-[10px] text-muted-foreground sm:mt-1 sm:text-xs">
-            {location}
-            {reviewUrl && viewOnGoogleLabel && (
-              <> · <span className="text-foreground/80">{viewOnGoogleLabel}</span></>
-            )}
-          </p>
-        )}
+      {image && (
+        <div className="relative aspect-square shrink-0 overflow-hidden border-b border-border sm:aspect-[3/4] sm:w-[200px] sm:border-b-0 sm:border-r">
+          <Image
+            src={image}
+            alt={imageAlt ?? author}
+            fill
+            sizes="(max-width: 640px) 100vw, 200px"
+            className="object-cover"
+          />
+        </div>
+      )}
+      <div className="flex min-w-0 flex-1 flex-col justify-center p-3 sm:p-8 md:p-10 lg:p-12">
+        <Stars count={rating} />
+        <blockquote className="mt-2 font-serif text-[11px] font-normal italic leading-[1.6] text-foreground sm:mt-6 sm:text-lg sm:leading-[1.7] md:text-xl">
+          &quot;{text}&quot;
+        </blockquote>
+        <div className="mt-4 border-t border-border pt-3 sm:mt-8 sm:pt-6">
+          <p className="text-[11px] font-semibold text-foreground sm:text-sm">{author}</p>
+          {location && (
+            <p className="mt-0.5 text-[10px] text-muted-foreground sm:mt-1 sm:text-xs">
+              {location}
+              {reviewUrl && viewOnGoogleLabel && (
+                <> · <span className="text-foreground/80">{viewOnGoogleLabel}</span></>
+              )}
+            </p>
+          )}
+        </div>
       </div>
     </>
   )
 
   const className =
-    "flex min-w-0 flex-col justify-center border border-border bg-card p-3 sm:p-8 md:p-10 lg:min-w-[280px] lg:basis-[280px] lg:p-12 transition-colors hover:border-foreground/20"
+    "flex min-w-0 flex-col overflow-hidden border border-border bg-card sm:flex-row transition-colors hover:border-foreground/20"
 
   if (reviewUrl) {
     return (
@@ -134,30 +151,18 @@ export async function Testimonials({ locale = "nl" }: { locale?: Locale }) {
           {t.bekijkGoogle}
         </a>
 
-        {/* Badr testimonial image + Testimonials */}
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:mt-16 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3 lg:gap-10">
-          {/* Badr testimonial photo */}
-          <div className="relative aspect-square overflow-hidden border border-border bg-card sm:aspect-[3/4]">
-            <Image
-              src={badrTestimonialImage}
-              alt={locale === "en" ? "Badr Belarbi – customer at Sherwany Barbershop" : "Badr Belarbi – klant bij Sherwany Barbershop"}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover"
+        {/* Testimonials */}
+        <div className="mt-10 flex flex-col gap-6 sm:mt-16 sm:gap-8 lg:gap-10">
+          {allReviews.slice(0, 3).map((review, i) => (
+            <TestimonialCard
+              key={i}
+              {...review}
+              reviewUrl={siteConfig.business.mapsUrl}
+              viewOnGoogleLabel={t.bekijkReviewOpGoogle}
+              image={i === 0 ? badrTestimonialImage : undefined}
+              imageAlt={i === 0 ? (locale === "en" ? "Badr Belarbi – customer at Sherwany Barbershop" : "Badr Belarbi – klant bij Sherwany Barbershop") : undefined}
             />
-          </div>
-
-          {/* Testimonials area */}
-          <div className="flex flex-col gap-3 overflow-visible sm:col-span-2 sm:gap-6">
-            {allReviews.slice(0, 3).map((review, i) => (
-              <TestimonialCard
-                key={i}
-                {...review}
-                reviewUrl={siteConfig.business.mapsUrl}
-                viewOnGoogleLabel={t.bekijkReviewOpGoogle}
-              />
-            ))}
-          </div>
+          ))}
         </div>
 
         {/* Feature highlights */}

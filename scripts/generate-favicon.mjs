@@ -13,14 +13,13 @@ const sizes = [
 ]
 
 // Grey favicon (#6b6b6b) – works on light and dark mode
-// Logo is black on transparent; linear maps black (0) to grey (~0.42 = 107)
-const greyLevel = 107 / 255 // ~#6b6b6b
+const greyLevel = 107 / 255
 
 for (const { size, name } of sizes) {
   const outputPath = join(publicDir, name)
   await sharp(logoPath)
     .resize(size, size)
-    .linear(0.6, greyLevel) // Black → grey, preserves shape
+    .linear(0.6, greyLevel)
     .png()
     .toFile(outputPath)
   console.log(`Generated ${name}`)

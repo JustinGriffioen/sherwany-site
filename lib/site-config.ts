@@ -10,7 +10,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://sherwanystudio.nl",
   locale: "nl_NL",
   localeAlternate: "en_GB",
-  ogImage: "/images/gallery-2.jpg",
+  ogImage: "/images/baard-trimmen.jpg",
   twitterHandle: "@sherwanybarbershop",
 
   business: {
@@ -27,7 +27,7 @@ export const siteConfig = {
       longitude: 6.1593413,
     },
     mapsUrl:
-      "https://www.google.com/maps/place/Sherwany+barbershop+%2F+A-Salon/@52.2521432,6.1592218,20.79z",
+      "https://maps.app.goo.gl/hQq1nsMgtsW6xSG6A",
     /** Use Maps Embed API with satellite view when NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY is set. Otherwise uses classic embed. */
     get mapsEmbedUrl() {
       const key = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY

@@ -85,7 +85,7 @@ function ContactPageJsonLd({ locale }: { locale: string }) {
       siteConfig.business.social.instagram,
       siteConfig.business.social.whatsapp,
     ],
-    image: `${url}/images/gallery-2.jpg`,
+    image: `${url}/images/baard-trimmen.jpg`,
     priceRange: "€€",
   }
 

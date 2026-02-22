@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "@/components/ui/sonner"
 import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
@@ -83,7 +84,6 @@ export const metadata: Metadata = {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/icon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-icon.png",
   },
@@ -182,6 +182,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <JsonLdSchemas />
         {children}
+        <Toaster richColors position="bottom-right" />
         <Analytics />
       </body>
     </html>

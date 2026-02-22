@@ -5,18 +5,18 @@ import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
 
 const staticImages = [
+  "/images/sherwany-outside.jpg",
   "/images/haircut-in-action.jpg",
-  "/images/gallery-1.jpg",
-  "/images/gallery-2.jpg",
-  "/images/gallery/img-7566.png",
+  "/images/knippen-styling.jpg",
+  "/images/baard-trimmen.jpg",
+  "/images/gallery/knippen-actie.png",
   "/images/sherwany-barber.jpg",
-  "/images/gallery/img-7564.png",
-  "/images/gallery/img-7567.png",
-  "/images/gallery/img-7570.png",
-  "/images/gallery/img-7573.png",
-  "/images/gallery/img-7574.png",
-  "/images/gallery/img-7575.png",
-  "/images/gallery/img-7576.png",
+  "/images/gallery/klant-in-stoel.png",
+  "/images/gallery/sfeer-in-zaak.png",
+  "/images/gallery/dames-knippen.png",
+  "/images/gallery/afgewerkt-resultaat.png",
+  "/images/gallery/interieur-zaak.png",
+  "/images/gallery/styling-resultaat.png",
 ]
 
 export async function Gallery({ locale = "nl" }: { locale?: Locale }) {

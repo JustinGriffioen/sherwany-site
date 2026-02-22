@@ -5,9 +5,9 @@ import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
 
 const instagramPreviewImages = [
-  "/images/gallery-1.jpg",
-  "/images/gallery/img-7567.png",
-  "/images/gallery/img-7574.png",
+  "/images/knippen-styling.jpg",
+  "/images/gallery/sfeer-in-zaak.png",
+  "/images/gallery/afgewerkt-resultaat.png",
 ]
 
 export function InstagramSection({ locale = "nl" }: { locale?: Locale }) {

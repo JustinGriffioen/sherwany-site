@@ -64,8 +64,10 @@ export const messages = {
       title: "Plan uw bezoek",
       description: "Boek online of loop binnen – wij zorgen dat u er straks weer scherp uitziet.",
       maakAfspraak: "Maak een afspraak",
-      planDesc: "Boek uw afspraak via de kalender hieronder. Voor beschikbaarheid op korte termijn kunt u ons bereiken per telefoon of WhatsApp.",
+      planDesc: "Klik op de knop om de beschikbare tijden te bekijken en te boeken. Voor beschikbaarheid op korte termijn kunt u ons bereiken per telefoon of WhatsApp.",
       ofBel: "Of bel ons direct",
+      openCalendar: "Ga naar het boekingssysteem",
+      opensInNewTab: "Opent in nieuw tabblad",
     },
     testimonials: {
       overline: "Beoordelingen",
@@ -76,7 +78,7 @@ export const messages = {
       volgOns: "Volg ons voor de nieuwste looks",
       hardcoded: [
         {
-          text: "Ik ben meer dan tevreden met de service hier. De kapper was zeer vakkundig en besteedde aandacht aan de details die ik had gevraagd. De knipbeurt was precies zoals ik in gedachten had, de ervaring voelde professioneel aan zonder dat het gehaast leek. Het resultaat was netjes en goed. Zeker de moeite waard.",
+          text: "Ik ben meer dan tevreden met de service hier. De kapper was zeer vakkundig en besteedde aandacht aan de details die ik had gevraagd. De knipbeurt was precies zoals ik in gedachten had, de ervaring voelde professioneel aan zonder dat het gehaast leek. Het resultaat was netjes en goed. Het was het zeker waard.",
           author: "Badr Belarbi",
           location: "Google",
         },
@@ -221,8 +223,10 @@ export const messages = {
       title: "Plan your visit",
       description: "Book online or walk in – we'll make sure you look sharp again soon.",
       maakAfspraak: "Book appointment",
-      planDesc: "Book your appointment using the calendar below. For short-notice availability, please reach out by phone or WhatsApp.",
+      planDesc: "Click the button to view available times and book. For short-notice availability, please reach out by phone or WhatsApp.",
       ofBel: "Or call us directly",
+      openCalendar: "Go to booking system",
+      opensInNewTab: "Opens in new tab",
     },
     testimonials: {
       overline: "Reviews",

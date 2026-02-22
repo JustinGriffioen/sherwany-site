@@ -17,8 +17,10 @@ export function Navigation() {
 
   const pathname = usePathname()
   const homePath = prefix ? prefix : "/"
-  const isContactPage = pathname === "/contact" || pathname === "/en/contact"
-  const maakAfspraakHref = isContactPage ? `${prefix ? prefix : ""}/contact#footer` : `${homePath}#footer`
+  const contactPath = prefix ? `${prefix}/contact` : "/contact"
+  const isContactPage = pathname?.endsWith("/contact") ?? false
+  const isHomePage = pathname === "/" || pathname === "/nl" || pathname === "/en"
+  const maakAfspraakHref = isHomePage || isContactPage ? "#footer" : `${contactPath}#footer`
   const navLinks = [
     { label: t.overOns, href: `${homePath}#over-ons` },
     { label: t.barbier, href: `${homePath}#team` },
