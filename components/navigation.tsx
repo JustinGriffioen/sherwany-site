@@ -43,7 +43,7 @@ export function Navigation() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto grid min-w-0 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-1.5 px-2.5 py-2 sm:gap-3 sm:px-6 sm:py-4 md:flex md:justify-between lg:px-10">
+      <div className="mx-auto grid min-w-0 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 py-2.5 sm:gap-3 sm:px-6 sm:py-4 md:flex md:justify-between lg:px-10">
         <a href={homePath} className="flex min-w-0 shrink items-center gap-2 md:block">
           <Image
             src="/images/logo.png"
@@ -53,7 +53,7 @@ export function Navigation() {
             priority
             quality={100}
             sizes="(max-width: 768px) 96px, 200px"
-            className="h-8 w-auto max-w-[80px] shrink-0 brightness-0 invert sm:h-10 sm:max-w-[100px] md:h-12 md:max-w-none"
+            className="h-9 w-auto max-w-[90px] shrink-0 brightness-0 invert sm:h-10 sm:max-w-[100px] md:h-12 md:max-w-none"
           />
         </a>
 
@@ -81,19 +81,19 @@ export function Navigation() {
         {/* Mobile: CTA centered, lang + menu right */}
         <a
           href={maakAfspraakHref}
-          className="flex shrink-0 justify-self-center items-center gap-1 border border-foreground px-2 py-1 text-[8px] font-medium uppercase tracking-[0.08em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:px-2.5 sm:py-1.5 sm:text-[9px] md:hidden"
+          className="flex shrink-0 justify-self-center items-center gap-1.5 border border-foreground px-3 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-foreground transition-colors hover:bg-foreground hover:text-background sm:px-3 sm:py-2 sm:text-[11px] md:hidden"
         >
-          <CalendarEvent className="h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3" />
+          <CalendarEvent className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" />
           <span className="whitespace-nowrap">{t.maakAfspraak}</span>
         </a>
         <div className="flex min-w-0 shrink-0 items-center justify-end gap-1.5 sm:gap-2 md:hidden">
-          <LanguageToggle className="text-[9px] sm:text-[11px]" />
+          <LanguageToggle className="text-[11px] sm:text-[12px]" />
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex min-h-[44px] min-w-[44px] items-center justify-center text-foreground"
             aria-label={isOpen ? t.menuClose : t.menuOpen}
           >
-            {isOpen ? <XLg className="h-5 w-5 sm:h-6 sm:w-6" /> : <List className="h-5 w-5 sm:h-6 sm:w-6" />}
+            {isOpen ? <XLg className="h-6 w-6 sm:h-6 sm:w-6" /> : <List className="h-6 w-6 sm:h-6 sm:w-6" />}
           </button>
         </div>
       </div>
