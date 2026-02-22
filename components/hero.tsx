@@ -4,14 +4,16 @@ import { MapPin, Clock, Phone, Mail } from "lucide-react"
 export function Hero() {
   return (
     <section id="home" className="relative min-h-screen">
-      {/* Background image */}
+      {/* Background image - barbershop interior/space, not the barber */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-barbershop.jpg"
-          alt="Premium barbershop interieur"
+          src="/images/gallery-2.jpg"
+          alt="Sherwany Studio barbershop interieur - kapsalon Deventer"
           fill
+          sizes="100vw"
           className="object-cover"
           priority
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-background/75" />
       </div>
@@ -28,7 +30,7 @@ export function Hero() {
             className="h-28 w-auto brightness-0 invert md:h-36"
           />
           <h1 className="mt-8 font-serif text-5xl font-normal leading-[1.1] text-foreground sm:text-6xl md:text-7xl lg:text-8xl text-balance">
-            Welcome bij
+            Welkom bij
             <br />
             Sherwany Studio
           </h1>
@@ -39,7 +41,7 @@ export function Hero() {
             href="#our-menu"
             className="mt-10 border border-foreground px-10 py-4 text-[13px] font-medium uppercase tracking-[0.2em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
           >
-            Make an Appointment
+            Maak een afspraak
           </a>
         </div>
 

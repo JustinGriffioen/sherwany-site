@@ -2,10 +2,19 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { siteConfig } from "@/lib/site-config"
+import { AppointmentWidget } from "@/components/appointment-widget"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+})
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+})
 
 const siteUrl = siteConfig.url
 const ogImageUrl = `${siteUrl}${siteConfig.ogImage}`
@@ -13,7 +22,7 @@ const ogImageUrl = `${siteUrl}${siteConfig.ogImage}`
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} Deventer | Premium Barbershop`,
+    default: `${siteConfig.name} Deventer | Premium Barbier`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -41,21 +50,21 @@ export const metadata: Metadata = {
     alternateLocale: siteConfig.localeAlternate,
     url: siteUrl,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} Deventer | Premium Barbershop`,
+    title: `${siteConfig.name} Deventer | Premium Barbier`,
     description: siteConfig.description,
     images: [
       {
         url: ogImageUrl,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - Premium barbershop interieur`,
+        alt: `${siteConfig.name} - Premium barbier interieur`,
       },
       { url: `${siteUrl}/images/logo.png`, width: 512, height: 512, alt: siteConfig.name },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} Deventer | Premium Barbershop`,
+    title: `${siteConfig.name} Deventer | Premium Barbier`,
     description: siteConfig.description,
     images: [ogImageUrl],
     creator: siteConfig.twitterHandle,
@@ -73,8 +82,9 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/icon-light-32x32.png", media: "(prefers-color-scheme: light)" },
-      { url: "/icon-dark-32x32.png", media: "(prefers-color-scheme: dark)" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon-light-32x32.png", sizes: "32x32", media: "(prefers-color-scheme: light)", type: "image/png" },
+      { url: "/icon-dark-32x32.png", sizes: "32x32", media: "(prefers-color-scheme: dark)", type: "image/png" },
       { url: "/icon.svg", type: "image/svg+xml" },
     ],
     apple: "/apple-icon.png",
@@ -92,8 +102,8 @@ export const viewport: Viewport = {
   themeColor: "#0a0a0a",
 }
 
-function LocalBusinessJsonLd() {
-  const jsonLd = {
+function JsonLdSchemas() {
+  const localBusiness = {
     "@context": "https://schema.org",
     "@type": "BarberShop",
     "@id": `${siteUrl}/#organization`,
@@ -134,16 +144,27 @@ function LocalBusinessJsonLd() {
       target: siteConfig.business.bookingUrl,
       result: {
         "@type": "Reservation",
-        name: "Afspraak maken",
+        name: "Afspraak maken bij Sherwany Studio",
       },
     },
   }
 
+  const webPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${siteConfig.name} Deventer | Premium Barbier`,
+    description: siteConfig.description,
+    url: siteUrl,
+    mainEntity: { "@id": `${siteUrl}/#organization` },
+    isPartOf: { "@id": `${siteUrl}/#organization` },
+    breadcrumb: { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: siteUrl }] },
+  }
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }} />
+    </>
   )
 }
 
@@ -154,9 +175,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="dns-prefetch" href="https://cal.com" />
+        <link rel="dns-prefetch" href="https://www.instagram.com" />
+      </head>
       <body className="font-sans antialiased">
-        <LocalBusinessJsonLd />
+        <a
+          href="#main-content"
+          className="absolute left-4 top-4 z-[100] -translate-y-full rounded bg-foreground px-4 py-2 text-background transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-ring"
+        >
+          Naar inhoud
+        </a>
+        <JsonLdSchemas />
         {children}
+        <AppointmentWidget />
         <Analytics />
       </body>
     </html>

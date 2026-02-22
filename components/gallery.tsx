@@ -24,24 +24,30 @@ export function Gallery() {
           <div className="relative aspect-[3/4] overflow-hidden">
             <Image
               src="/images/gallery-1.jpg"
-              alt="Barbier knipt haar met een schaar"
+              alt="Barbier knipt haar met een schaar - Sherwany Studio"
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              loading="lazy"
               className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
             />
           </div>
           <div className="relative aspect-[3/4] overflow-hidden">
             <Image
-              src="/images/gallery-2.jpg"
-              alt="Traditionele barbier gereedschap op marmeren oppervlak"
+              src="/images/hero-barbershop.jpg"
+              alt="Sherwany Studio barbershop interieur - Deventer"
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              loading="lazy"
               className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
             />
           </div>
           <div className="relative aspect-[3/4] overflow-hidden sm:col-span-2 lg:col-span-1">
             <Image
               src="/images/gallery-3.jpg"
-              alt="Warme handdoek behandeling in de barbershop"
+              alt="Warme handdoek behandeling in de barbershop - Sherwany Studio"
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              loading="lazy"
               className="object-cover grayscale transition-all duration-700 hover:grayscale-0 hover:scale-105"
             />
           </div>

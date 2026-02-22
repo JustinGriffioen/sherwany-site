@@ -23,17 +23,19 @@ export function Footer() {
             </a>
             <nav className="flex items-center gap-6">
               <a
-                href="/team"
+                href="#team"
                 className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
               >
-                Team
+                De barbier
+              </a>
+              <a
+                href="#harsen"
+                className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Harsen
               </a>
             </nav>
           </div>
-          <p className="text-xs text-muted-foreground">
-            Developed by{" "}
-            <span className="text-foreground">TrimTime Studios</span>
-          </p>
         </div>
 
         <div className="mt-8 border-t border-border pt-8">

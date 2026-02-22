@@ -37,7 +37,7 @@ export function Testimonials() {
               Badr Belarbi
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Deventer, Netherlands
+              Deventer, Nederland
             </p>
           </div>
         </div>

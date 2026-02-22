@@ -5,9 +5,10 @@ import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
 const navLinks = [
-  { label: "A-Waxing", href: "/a-waxing" },
-  { label: "Team", href: "/team" },
-  { label: "Pricing", href: "#our-menu" },
+  { label: "Over ons", href: "#over-ons" },
+  { label: "De barbier", href: "#team" },
+  { label: "Harsen", href: "#harsen" },
+  { label: "Prijzen", href: "#our-menu" },
   { label: "Contact", href: "#footer" },
 ]
 
@@ -30,13 +31,15 @@ export function Navigation() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10 py-4">
-        <a href="#home" className="flex items-center gap-3">
+        <a href="#home" className="flex shrink-0 items-center gap-3">
           <Image
             src="/images/logo.png"
             alt="Sherwany Studio logo"
-            width={48}
-            height={48}
-            className="h-12 w-auto brightness-0 invert"
+            width={64}
+            height={64}
+            priority
+            quality={95}
+            className="h-12 w-12 brightness-0 invert"
           />
         </a>
 

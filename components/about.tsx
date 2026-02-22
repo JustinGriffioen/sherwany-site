@@ -2,19 +2,21 @@ import Image from "next/image"
 
 export function About() {
   return (
-    <section id="over-ons" className="bg-background py-24 lg:py-32">
+    <section id="over-ons" className="bg-card py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
           Over ons
         </p>
 
         <div className="mt-14 grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* Image */}
+          {/* Shop interior image */}
           <div className="relative aspect-[4/5] overflow-hidden">
             <Image
-              src="/images/about-barbershop.jpg"
-              alt="Barbier aan het werk met een scheermes"
+              src="/images/hero-barbershop.jpg"
+              alt="Sherwany Studio barbershop in Deventer - interieur"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              loading="lazy"
               className="object-cover grayscale"
             />
           </div>
@@ -27,12 +29,11 @@ export function About() {
               Deventer
             </h2>
             <p className="mt-8 text-[15px] leading-[1.8] text-muted-foreground">
-              Bij Sherwany Studio bieden we hoogwaardige knip- en
-              scheerdiensten voor mannen, met oog voor stijl en detail. Ons
-              team van ervaren kappers zorgt voor een ontspannen sfeer en
-              persoonlijke aandacht, zodat je er altijd op je best uitziet.
-              Van klassiek tot modern, wij combineren vakmanschap met de
-              nieuwste technieken voor het perfecte resultaat.
+              Gelegen in het hart van Deventer is Sherwany Studio een plek waar
+              traditie en moderne stijl samenkomen. Onze barbershop biedt een
+              ontspannen sfeer waar je even tot jezelf kunt komen. Van de inrichting
+              tot de behandeling – alles is afgestemd op jouw comfort en de perfecte
+              uitstraling.
             </p>
 
             {/* Stats */}
@@ -42,7 +43,7 @@ export function About() {
                   874+
                 </p>
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                  subscribers on youtube
+                  abonnees op YouTube
                 </p>
                 <p className="text-[13px] font-medium text-foreground">
                   Tevreden klanten
@@ -53,7 +54,7 @@ export function About() {
                   7.5K+
                 </p>
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                  Followers on instagram
+                  volgers op Instagram
                 </p>
                 <a
                   href="https://www.instagram.com/sherwanybarbershop/"
