@@ -79,33 +79,33 @@ function ServiceCard({
   return (
     <article className="group flex flex-col overflow-hidden rounded-md border border-border bg-background/60 transition-all duration-200 hover:border-foreground/25 hover:bg-background/80">
       {image ? (
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted/20">
+        <div className="relative aspect-[3/4] w-full overflow-hidden bg-muted/20 sm:aspect-[4/3]">
           <Image
             src={image}
             alt=""
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
           />
         </div>
       ) : (
-        <div className="flex aspect-[4/3] w-full items-center justify-center border-b border-border bg-muted/20">
-          <Icon className="h-10 w-10 text-muted-foreground sm:h-12 sm:w-12" />
+        <div className="flex aspect-[3/4] w-full items-center justify-center border-b border-border bg-muted/20 sm:aspect-[4/3]">
+          <Icon className="h-8 w-8 text-muted-foreground sm:h-12 sm:w-12" />
         </div>
       )}
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">{name}</h3>
+      <div className="flex flex-1 flex-col p-3 sm:p-6">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-[13px] font-semibold leading-snug text-foreground sm:text-lg">{name}</h3>
           <span className="shrink-0 text-right">
             {priceFrom && priceFromLabel && (
-              <span className="mr-1 text-[10px] font-normal uppercase tracking-wider text-muted-foreground sm:text-xs">
+              <span className="mr-0.5 text-[9px] font-normal uppercase tracking-wider text-muted-foreground sm:mr-1 sm:text-xs">
                 {priceFromLabel}{" "}
               </span>
             )}
-            <span className="font-serif text-xl text-foreground sm:text-2xl">€{price}</span>
+            <span className="font-serif text-base text-foreground sm:text-2xl">€{price}</span>
           </span>
         </div>
-        <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground sm:text-[15px]">
+        <p className="mt-2 text-[11px] leading-relaxed text-muted-foreground sm:mt-3 sm:text-[15px]">
           {description}
         </p>
       </div>
@@ -132,22 +132,22 @@ export function Services({ locale = "nl" }: { locale?: Locale }) {
           {t.subtitle}
         </p>
 
-        <div className="mt-12 sm:mt-16 lg:mt-20">
+        <div className="mt-10 sm:mt-16 lg:mt-20">
           <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground sm:text-sm">
             {t.heren}
           </h3>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-6">
             {dienstenHeren.map((dienst) => (
               <ServiceCard key={dienst.name} {...dienst} />
             ))}
           </div>
         </div>
 
-        <div className="mt-14 border-t border-border/60 pt-14 sm:mt-20 sm:pt-20 lg:mt-24 lg:pt-24">
+        <div className="mt-10 border-t border-border/60 pt-10 sm:mt-20 sm:pt-20 lg:mt-24 lg:pt-24">
           <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground sm:text-sm">
             {t.dames}
           </h3>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-6">
             {dienstenDames.map((dienst) => (
               <ServiceCard
                 key={dienst.name}

@@ -29,23 +29,54 @@ export function ContactInfo({ locale = "nl" }: { locale?: Locale }) {
           </p>
         </div>
 
-        {/* Exterior image */}
-        <a
-          href={business.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-10 block overflow-hidden rounded-lg border border-border sm:mt-12"
-        >
-          <div className="relative aspect-[21/9] w-full">
+        {/* Location images */}
+        <div className="mt-10 mx-auto grid max-w-3xl grid-cols-2 gap-2 sm:mt-12 lg:gap-3">
+          <a
+            href={business.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-lg border border-border"
+          >
             <Image
               src="/images/sherwany-outside.jpg"
               alt={locale === "en" ? "Sherwany Barbershop & Studio – storefront in Deventer, Grote Overstraat" : "Sherwany Barbershop & Studio – gevel in Deventer, Grote Overstraat"}
               fill
-              sizes="(max-width: 1024px) 100vw, 1280px"
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 672px, 768px"
+              quality={75}
               className="object-cover"
             />
-          </div>
-        </a>
+          </a>
+          <a
+            href={business.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border"
+          >
+            <Image
+              src="/images/sherwany-black-white.jpg"
+              alt={locale === "en" ? "Sherwany Barbershop & Studio – interior Deventer" : "Sherwany Barbershop & Studio – interieur Deventer"}
+              fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 336px, 384px"
+              quality={75}
+              className="object-cover"
+            />
+          </a>
+          <a
+            href={business.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border"
+          >
+            <Image
+              src="/images/gallery/sfeer-in-zaak.png"
+              alt={locale === "en" ? "Sherwany Barbershop & Studio – atmosphere in the shop" : "Sherwany Barbershop & Studio – sfeer in de zaak"}
+              fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 336px, 384px"
+              quality={75}
+              className="object-cover"
+            />
+          </a>
+        </div>
 
         {/* Info cards */}
         <div className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">

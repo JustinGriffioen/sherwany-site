@@ -59,15 +59,15 @@ function TestimonialCard({
           />
         </div>
       )}
-      <div className="flex min-w-0 flex-1 flex-col justify-center p-3 sm:p-8 md:p-10 lg:p-12">
+      <div className="flex min-w-0 flex-1 flex-col justify-center p-5 sm:p-8 md:p-10 lg:p-12">
         <Stars count={rating} />
-        <blockquote className="mt-2 font-serif text-[11px] font-normal italic leading-[1.6] text-foreground sm:mt-6 sm:text-lg sm:leading-[1.7] md:text-xl">
+        <blockquote className="mt-3 font-serif text-[15px] font-normal italic leading-[1.65] text-foreground sm:mt-6 sm:text-lg sm:leading-[1.7] md:text-xl">
           &quot;{text}&quot;
         </blockquote>
         <div className="mt-4 border-t border-border pt-3 sm:mt-8 sm:pt-6">
-          <p className="text-[11px] font-semibold text-foreground sm:text-sm">{author}</p>
+          <p className="text-[13px] font-semibold text-foreground sm:text-sm">{author}</p>
           {location && (
-            <p className="mt-0.5 text-[10px] text-muted-foreground sm:mt-1 sm:text-xs">
+            <p className="mt-0.5 text-[11px] text-muted-foreground sm:mt-1 sm:text-xs">
               {location}
               {reviewUrl && viewOnGoogleLabel && (
                 <> · <span className="text-foreground/80">{viewOnGoogleLabel}</span></>

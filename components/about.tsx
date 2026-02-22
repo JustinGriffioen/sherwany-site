@@ -9,8 +9,8 @@ export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
   return (
     <section id="over-ons" className="border-t border-border bg-card py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-2 items-start gap-3 sm:gap-16 lg:gap-20">
-          <div className="relative min-h-[280px] sm:min-h-[360px]">
+        <div className="grid grid-cols-1 items-start gap-8 sm:grid-cols-2 sm:gap-16 lg:gap-20">
+          <div className="relative order-2 min-h-[260px] sm:order-1 sm:min-h-[360px]">
             <div className="grid grid-cols-6 grid-rows-6 gap-2 sm:gap-3">
             {/* Card 1 - large, main */}
             <div className="col-span-4 row-span-4 overflow-hidden rounded-lg border border-border shadow-md">
@@ -19,8 +19,8 @@ export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
                   src="/images/sherwany-black-white.jpg"
                   alt="Sherwany Barbershop & Studio – indruk van de zaak in Deventer"
                   fill
-                  sizes="(max-width: 1024px) 65vw, 35vw"
-                  loading="lazy"
+                  sizes="(max-width: 640px) 75vw, (max-width: 1024px) 40vw, 35vw"
+                  priority
                   className="object-cover"
                 />
               </div>
@@ -32,8 +32,9 @@ export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
                   src="/images/sherwany-outside.jpg"
                   alt={locale === "en" ? "Sherwany Barbershop & Studio – storefront in Deventer" : "Sherwany Barbershop & Studio – gevel in Deventer"}
                   fill
-                  sizes="(max-width: 1024px) 30vw, 15vw"
+                  sizes="(max-width: 640px) 30vw, (max-width: 1024px) 25vw, 200px"
                   loading="lazy"
+                  quality={70}
                   className="object-cover"
                 />
               </div>
@@ -45,8 +46,9 @@ export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
                   src="/images/baard-trimmen.jpg"
                   alt="Sfeer bij Sherwany Barbershop"
                   fill
-                  sizes="(max-width: 1024px) 30vw, 15vw"
+                  sizes="(max-width: 640px) 30vw, (max-width: 1024px) 25vw, 200px"
                   loading="lazy"
+                  quality={70}
                   className="object-cover"
                 />
               </div>
@@ -66,16 +68,16 @@ export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
             </div>
           </div>
           </div>
-          <div className="min-w-0">
-            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:text-xs sm:tracking-[0.3em]">
+          <div className="order-1 min-w-0 sm:order-2">
+            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:text-xs sm:tracking-[0.3em]">
               {t.overOns}
             </p>
-            <h2 className="mt-2 font-serif text-lg font-normal leading-[1.2] text-foreground sm:mt-6 sm:text-4xl md:text-5xl sm:leading-[1.15] text-balance">
+            <h2 className="mt-3 font-serif text-2xl font-normal leading-[1.2] text-foreground sm:mt-6 sm:text-4xl md:text-5xl sm:leading-[1.15] text-balance">
               {t.shopTitle}
               <br />
               {t.shopCity}
             </h2>
-            <p className="mt-2 text-[11px] leading-[1.6] text-muted-foreground sm:mt-8 sm:text-[15px] sm:leading-[1.8]">
+            <p className="mt-4 text-[15px] leading-[1.7] text-muted-foreground sm:mt-8 sm:text-[15px] sm:leading-[1.8]">
               {t.shopDesc}
             </p>
             <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 sm:mt-8 sm:gap-x-8 sm:gap-y-4">
@@ -84,14 +86,17 @@ export function AboutIntro({ locale = "nl" }: { locale?: Locale }) {
                 <span className="font-serif text-xl font-normal text-foreground sm:text-3xl">874+</span>
                 <span className="text-[11px] text-muted-foreground sm:text-xs">{t.klanten}</span>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="flex gap-0.5">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <StarFill key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400 sm:h-4 sm:w-4" />
-                  ))}
+              <div className="flex flex-col gap-0.5 sm:gap-1">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <StarFill key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400 sm:h-4 sm:w-4" />
+                    ))}
+                  </div>
+                  <span className="font-serif text-xl font-normal text-foreground sm:text-3xl">4.9</span>
+                  <span className="text-[11px] text-muted-foreground sm:text-xs">{t.google}</span>
                 </div>
-                <span className="font-serif text-xl font-normal text-foreground sm:text-3xl">4.9</span>
-                <span className="text-[11px] text-muted-foreground sm:text-xs">{t.google}</span>
+                <span className="text-[10px] text-muted-foreground sm:text-[11px]">{t.googleReviews}</span>
               </div>
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
@@ -126,41 +131,41 @@ export function AboutTeam({ locale = "nl" }: { locale?: Locale }) {
   return (
     <section id="team" className="border-t border-border bg-card py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-2 items-start gap-3 sm:gap-16 lg:gap-20">
-          <div className="relative order-2 aspect-square overflow-hidden sm:aspect-[4/5]">
-            <Image
-              src="/images/sherwany-barber.jpg"
-              alt="Sherwany – eigenaar en barbier van Sherwany Barbershop & Studio"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              loading="lazy"
-              className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            />
+        <div className="grid grid-cols-1 items-start gap-8 sm:grid-cols-2 sm:gap-16 lg:gap-20">
+          <div className="relative order-2 aspect-square overflow-hidden sm:order-1 sm:aspect-[4/5]">
+                <Image
+                  src="/images/sherwany-barber.jpg"
+                  alt="Sherwany – eigenaar en barbier van Sherwany Barbershop & Studio"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 600px"
+                  loading="lazy"
+                  className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                />
           </div>
-          <div className="order-1 min-w-0 lg:py-8">
-            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:text-xs sm:tracking-[0.3em]">
+          <div className="order-1 min-w-0 sm:order-2 lg:py-8">
+            <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground sm:text-xs sm:tracking-[0.3em]">
               {t.barbier}
             </p>
-            <h2 className="mt-2 font-serif text-lg font-normal leading-[1.2] text-foreground sm:mt-6 sm:text-4xl md:text-5xl sm:leading-[1.15] text-balance">
+            <h2 className="mt-3 font-serif text-2xl font-normal leading-[1.2] text-foreground sm:mt-6 sm:text-4xl md:text-5xl sm:leading-[1.15] text-balance">
               {t.meetTitle}
               <br />
               {t.meetName}
             </h2>
-            <p className="mt-2 text-[11px] leading-[1.6] text-muted-foreground sm:mt-8 sm:text-[15px] sm:leading-[1.8]">
+            <p className="mt-4 text-[15px] leading-[1.7] text-muted-foreground sm:mt-8 sm:text-[15px] sm:leading-[1.8]">
               {t.meetDesc}
             </p>
-            <div className="mt-4 flex flex-col gap-2 sm:mt-12 sm:flex-row sm:flex-wrap sm:gap-4">
+            <div className="mt-6 flex flex-col gap-2 sm:mt-12 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
                 href="https://www.instagram.com/sherwanybarbershop/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 border border-foreground px-3 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background sm:justify-start sm:px-6 sm:py-3 sm:text-[13px] sm:tracking-[0.15em]"
+                className="inline-flex items-center justify-center gap-2 border border-foreground px-4 py-3 text-[11px] font-medium uppercase tracking-[0.1em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background sm:justify-start sm:px-6 sm:py-3 sm:text-[13px] sm:tracking-[0.15em]"
               >
                 {t.instagram}
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 border border-border px-3 py-2 text-[10px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground sm:justify-start sm:px-6 sm:py-3 sm:text-[13px] sm:tracking-[0.15em]"
+                className="inline-flex items-center justify-center gap-2 border border-border px-4 py-3 text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground sm:justify-start sm:px-6 sm:py-3 sm:text-[13px] sm:tracking-[0.15em]"
               >
                 {t.bekijkDiensten}
               </a>

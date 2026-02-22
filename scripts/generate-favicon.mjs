@@ -12,8 +12,8 @@ const sizes = [
   { size: 180, name: "apple-icon.png" },
 ]
 
-// Grey favicon (#6b6b6b) – works on light and dark mode
-const greyLevel = 107 / 255
+// Light grey favicon – visible on dark browser tabs/chrome
+const greyLevel = 200 / 255
 
 for (const { size, name } of sizes) {
   const outputPath = join(publicDir, name)
