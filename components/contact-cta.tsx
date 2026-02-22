@@ -11,7 +11,7 @@ export function ContactCTA({ locale = "nl" }: { locale?: Locale }) {
       id="footer"
       className="border-t border-border bg-background py-16 sm:py-24 lg:py-32"
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10 text-center">
+      <div className="mx-auto max-w-6xl px-0 sm:px-6 lg:px-10 text-center">
         <Image
           src="/images/logo.png"
           alt="Sherwany Barbershop & Studio"
@@ -49,7 +49,7 @@ export function ContactCTA({ locale = "nl" }: { locale?: Locale }) {
         </div>
 
         {/* Cal.com inline embed */}
-        <div className="mt-10 w-full border border-border bg-card p-5 sm:mt-14 sm:p-8 lg:p-12 lg:px-16">
+        <div className="mt-10 w-full border-y border-border bg-card p-4 sm:mt-14 sm:border sm:p-8 lg:p-12 lg:px-16">
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             {t.maakAfspraak}
           </p>

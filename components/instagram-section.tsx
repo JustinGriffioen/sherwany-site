@@ -19,7 +19,7 @@ export function InstagramSection({ locale = "nl" }: { locale?: Locale }) {
         <p className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
           {t.overline}
         </p>
-        <h2 className="mt-4 font-serif text-3xl font-normal leading-[1.15] text-foreground sm:mt-6 sm:text-4xl md:text-5xl lg:text-6xl text-balance">
+        <h2 className="mt-4 font-serif text-xl font-normal leading-[1.15] text-foreground sm:mt-6 sm:text-4xl md:text-5xl lg:text-6xl text-balance">
           {t.title}
         </h2>
         <p className="mt-4 text-[15px] text-muted-foreground">
