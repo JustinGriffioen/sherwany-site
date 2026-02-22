@@ -37,12 +37,13 @@ export function InstagramSection({ locale = "nl" }: { locale?: Locale }) {
             <span className="text-sm font-semibold">{t.title}</span>
           </a>
           <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            {instagramPreviewImages.map((src) => (
+            {instagramPreviewImages.map((src, i) => (
               <a
                 key={src}
                 href={siteConfig.business.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={locale === "en" ? `View photo ${i + 1} on Instagram` : `Bekijk foto ${i + 1} op Instagram`}
                 className="relative aspect-square w-24 overflow-hidden border border-border opacity-90 transition-opacity hover:opacity-100 sm:w-32"
               >
                 <Image

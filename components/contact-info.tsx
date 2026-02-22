@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Clock, Telephone, Envelope, BoxArrowUpRight } from "react-bootstrap-icons"
+import { Clock, Telephone, Envelope, BoxArrowUpRight, GeoAlt } from "react-bootstrap-icons"
 import { siteConfig } from "@/lib/site-config"
 import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
@@ -39,7 +39,21 @@ export function ContactInfo({ locale = "nl" }: { locale?: Locale }) {
             <h3 className="p-6 pb-0 text-sm font-semibold uppercase tracking-wider text-foreground sm:p-8 sm:pb-0">
               {t.adres}
             </h3>
-            <div className="relative mt-4 aspect-[4/3] flex-1 overflow-hidden">
+            {/* Mobile: address + Maps button (no iframe – saves ~150 KiB JS) */}
+            <div className="flex flex-col gap-4 p-6 pt-4 sm:hidden">
+              <p className="text-[15px] leading-relaxed text-muted-foreground">
+                {business.address.street}
+                <br />
+                {business.address.postalCode} {business.address.city}
+              </p>
+              <span className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded border border-border px-4 py-3 text-[13px] font-medium text-muted-foreground transition-colors group-hover:border-foreground group-hover:text-foreground">
+                <GeoAlt className="h-4 w-4 shrink-0" />
+                {t.routeBekijken}
+                <BoxArrowUpRight className="h-3.5 w-3.5 shrink-0" />
+              </span>
+            </div>
+            {/* Desktop/tablet: full Maps embed */}
+            <div className="relative mt-4 hidden aspect-[4/3] flex-1 overflow-hidden sm:mt-4 sm:block">
               <iframe
                 src={business.mapsEmbedUrl}
                 width="100%"
@@ -52,7 +66,7 @@ export function ContactInfo({ locale = "nl" }: { locale?: Locale }) {
                 className="absolute inset-0 h-full w-full"
               />
             </div>
-            <p className="p-4 pt-3 flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors group-hover:text-foreground sm:p-6 sm:pt-4">
+            <p className="hidden p-4 pt-3 items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors group-hover:text-foreground sm:flex sm:p-6 sm:pt-4">
               {t.routeBekijken}
               <BoxArrowUpRight className="h-3.5 w-3.5" />
             </p>

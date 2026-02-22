@@ -70,7 +70,7 @@ export function Navigation() {
           ))}
           <a
             href={maakAfspraakHref}
-            className="flex items-center gap-2 border border-foreground px-7 py-2.5 text-[13px] font-medium uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            className="flex shrink-0 items-center gap-2 whitespace-nowrap border border-foreground px-7 py-2.5 text-[13px] font-medium uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
           >
             <CalendarEvent className="h-4 w-4" />
             {t.maakAfspraak}
@@ -90,10 +90,10 @@ export function Navigation() {
           <LanguageToggle className="text-[9px] sm:text-[11px]" />
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-foreground"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-foreground"
             aria-label={isOpen ? t.menuClose : t.menuOpen}
           >
-            {isOpen ? <XLg className="h-4 w-4 sm:h-5 sm:w-5" /> : <List className="h-4 w-4 sm:h-5 sm:w-5" />}
+            {isOpen ? <XLg className="h-5 w-5 sm:h-6 sm:w-6" /> : <List className="h-5 w-5 sm:h-6 sm:w-6" />}
           </button>
         </div>
       </div>
