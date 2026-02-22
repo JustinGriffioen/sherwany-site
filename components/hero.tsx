@@ -7,8 +7,8 @@ const heroImages = [
   { src: "/images/haircut-in-action.jpg", alt: "Knippen in actie" },
   { src: "/images/knippen-styling.jpg", alt: "Knippen en styling" },
   { src: "/images/baard-trimmen.jpg", alt: "Baard trimmen en verzorging" },
-  { src: "/images/gallery/klant-in-stoel.png", alt: "Klant in stoel" },
   { src: "/images/gallery/afgewerkt-resultaat.png", alt: "Afgewerkt resultaat" },
+  { src: "/images/gallery/klant-in-stoel.png", alt: "Klant in stoel" },
   { src: "/images/gallery/dames-knippen.png", alt: "Dames knippen bij Sherwany" },
   { src: "/images/sherwany-black-white.jpg", alt: "Indruk van de zaak" },
   { src: "/images/sherwany-outside.jpg", alt: "Sherwany barbershop gevel Deventer" },
@@ -16,16 +16,16 @@ const heroImages = [
 ]
 
 const floatStyles = [
-  "top-[14%] left-[4%] w-14 sm:w-20 md:w-24 lg:w-28 rotate-[-10deg] opacity-60 sm:opacity-100 z-[1]",
-  "top-[12%] right-[4%] w-12 sm:w-18 md:w-22 lg:w-26 rotate-[8deg] opacity-60 sm:opacity-100 z-[2]",
-  "top-[32%] left-[2%] w-11 sm:w-16 md:w-20 lg:w-24 rotate-[-6deg] z-[1]",
-  "top-[48%] right-[3%] w-11 sm:w-18 md:w-24 lg:w-28 rotate-[10deg] z-[2]",
-  "bottom-[14%] left-[5%] w-12 sm:w-16 md:w-20 lg:w-24 rotate-[5deg] z-[1]",
+  "top-[14%] left-[4%] w-18 sm:w-20 md:w-24 lg:w-28 rotate-[-10deg] opacity-60 sm:opacity-100 z-[1]",
+  "top-[16%] right-[4%] w-16 sm:w-18 md:w-22 lg:w-26 rotate-[8deg] opacity-60 sm:opacity-100 z-[2]",
+  "top-[48%] left-[2%] w-14 sm:w-16 sm:top-[32%] md:w-20 lg:w-24 rotate-[-6deg] z-[1]",
+  "top-[48%] right-[3%] w-14 sm:w-18 md:w-24 lg:w-28 rotate-[10deg] z-[2]",
+  "bottom-[14%] left-[5%] w-16 sm:w-16 md:w-20 lg:w-24 rotate-[5deg] z-[1]",
   "top-[42%] left-[6%] w-9 sm:w-14 md:w-18 lg:w-20 rotate-[-4deg] hidden md:block z-[1]",
-  "bottom-[10%] right-[5%] w-11 sm:w-14 md:w-18 lg:w-22 rotate-[6deg] z-[2]",
+  "bottom-[10%] right-[5%] w-14 sm:w-14 md:w-18 lg:w-22 rotate-[6deg] z-[2]",
   "top-[24%] right-[12%] w-8 sm:w-12 md:w-16 lg:w-18 rotate-[3deg] hidden lg:block z-[1]",
   "top-[36%] right-[8%] w-9 sm:w-14 md:w-18 lg:w-20 rotate-[-5deg] hidden sm:block z-[1]",
-  "top-[22%] right-[4%] w-10 sm:w-16 md:w-20 lg:w-24 rotate-[6deg] hidden md:block z-[2]",
+  "top-[12%] right-[4%] w-10 sm:w-16 md:w-20 lg:w-24 rotate-[6deg] hidden md:block z-[2]",
 ]
 
 export function Hero({ locale = "nl" }: { locale?: Locale }) {
@@ -44,7 +44,7 @@ export function Hero({ locale = "nl" }: { locale?: Locale }) {
                 src={img.src}
                 alt={img.alt}
                 fill
-                sizes="(max-width: 640px) 80px, (max-width: 768px) 112px, 144px"
+                sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, 144px"
                 className="object-cover"
                 priority={i < 3}
               />
@@ -77,7 +77,7 @@ export function Hero({ locale = "nl" }: { locale?: Locale }) {
           </p>
           <a
             href="#footer"
-            className="mt-6 inline-flex min-h-[48px] min-w-[160px] items-center justify-center border border-white px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-white hover:text-black sm:mt-10 sm:min-h-12 sm:min-w-[200px] sm:px-10 sm:py-4 sm:text-[13px]"
+            className="mt-8 inline-flex min-h-[48px] min-w-[160px] items-center justify-center border border-white bg-white px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-black transition-all duration-300 hover:bg-transparent hover:text-white sm:mt-10 sm:min-h-12 sm:min-w-[200px] sm:px-10 sm:py-4 sm:text-[13px]"
           >
             {t.cta}
           </a>
