@@ -10,7 +10,7 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://sherwanystudio.nl",
   locale: "nl_NL",
   localeAlternate: "en_GB",
-  ogImage: "/images/baard-trimmen.jpg",
+  ogImage: "/images/sherwany-outside.jpg",
   twitterHandle: "@sherwanybarbershop",
 
   business: {

@@ -61,7 +61,9 @@ export function Hero({ locale = "nl" }: { locale?: Locale }) {
             alt="Sherwany Barbershop & Studio"
             width={512}
             height={512}
-            sizes="(max-width: 640px) 56px, (max-width: 768px) 80px, 96px"
+            sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 160px"
+            priority
+            quality={95}
             className="h-12 w-auto brightness-0 invert sm:h-16 md:h-20"
           />
           <p className="mt-5 text-[11px] font-medium uppercase tracking-[0.25em] text-white/60 sm:mt-8 sm:text-xs sm:tracking-[0.3em]">
