@@ -137,6 +137,9 @@ function JsonLdSchemas() {
     sameAs: [
       siteConfig.business.social.instagram,
       siteConfig.business.social.whatsapp,
+      siteConfig.business.social.tiktok,
+      siteConfig.business.social.linkedin,
+      siteConfig.business.social.facebook,
     ],
     potentialAction: {
       "@type": "ReserveAction",

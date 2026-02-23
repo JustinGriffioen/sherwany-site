@@ -1,5 +1,6 @@
-import { Instagram, Whatsapp } from "react-bootstrap-icons"
+import { Instagram, Whatsapp, Tiktok, Linkedin, Facebook } from "react-bootstrap-icons"
 import Image from "next/image"
+import { siteConfig } from "@/lib/site-config"
 import { CalEmbed } from "@/components/cal-embed"
 import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
@@ -29,7 +30,7 @@ export function ContactCTA({ locale = "nl" }: { locale?: Locale }) {
         {/* Social icons */}
         <div className="mt-10 flex items-center justify-center gap-4">
           <a
-            href="https://www.instagram.com/sherwanybarbershop/"
+            href={siteConfig.business.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 items-center justify-center border border-border text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
@@ -38,13 +39,40 @@ export function ContactCTA({ locale = "nl" }: { locale?: Locale }) {
             <Instagram className="h-5 w-5" />
           </a>
           <a
-            href="https://wa.me/31630120257"
+            href={siteConfig.business.social.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 items-center justify-center border border-border text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
             aria-label="WhatsApp"
           >
             <Whatsapp className="h-5 w-5" />
+          </a>
+          <a
+            href={siteConfig.business.social.tiktok}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 w-12 items-center justify-center border border-border text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            aria-label="TikTok"
+          >
+            <Tiktok className="h-5 w-5" />
+          </a>
+          <a
+            href={siteConfig.business.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 w-12 items-center justify-center border border-border text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="h-5 w-5" />
+          </a>
+          <a
+            href={siteConfig.business.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-12 w-12 items-center justify-center border border-border text-foreground transition-all duration-300 hover:bg-foreground hover:text-background"
+            aria-label="Facebook"
+          >
+            <Facebook className="h-5 w-5" />
           </a>
         </div>
 

@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { GeoAlt, Clock, Telephone, Envelope, Instagram, Whatsapp } from "react-bootstrap-icons"
+import { GeoAlt, Clock, Telephone, Envelope, Instagram, Whatsapp, Tiktok, Linkedin, Facebook } from "react-bootstrap-icons"
 import { siteConfig } from "@/lib/site-config"
 import type { Locale } from "@/lib/i18n"
 import { messages } from "@/lib/i18n/messages"
@@ -157,6 +157,33 @@ export function Footer({
                 aria-label="WhatsApp"
               >
                 <Whatsapp className="h-4 w-4" />
+              </a>
+              <a
+                href={business.social.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+                aria-label="TikTok"
+              >
+                <Tiktok className="h-4 w-4" />
+              </a>
+              <a
+                href={business.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a
+                href={business.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded border border-border text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-4 w-4" />
               </a>
             </div>
           </div>

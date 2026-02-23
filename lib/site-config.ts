@@ -50,6 +50,9 @@ export const siteConfig = {
     social: {
       instagram: "https://www.instagram.com/sherwanybarbershop/",
       whatsapp: "https://wa.me/31630120257",
+      tiktok: "https://www.tiktok.com/@sherwany.barbersh",
+      linkedin: "https://nl.linkedin.com/in/mohammed-sherwany-48079928b",
+      facebook: "https://www.facebook.com/profile.php?id=61550035233012",
     },
   },
 } as const

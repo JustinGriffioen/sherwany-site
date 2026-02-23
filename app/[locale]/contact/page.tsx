@@ -10,6 +10,9 @@ import {
   Envelope,
   Instagram,
   Whatsapp,
+  Tiktok,
+  Linkedin,
+  Facebook,
   BoxArrowUpRight,
 } from "react-bootstrap-icons"
 import { siteConfig } from "@/lib/site-config"
@@ -84,6 +87,9 @@ function ContactPageJsonLd({ locale }: { locale: string }) {
     sameAs: [
       siteConfig.business.social.instagram,
       siteConfig.business.social.whatsapp,
+      siteConfig.business.social.tiktok,
+      siteConfig.business.social.linkedin,
+      siteConfig.business.social.facebook,
     ],
     image: `${url}/images/sherwany-outside.jpg`,
     priceRange: "€€",
@@ -255,6 +261,33 @@ export default async function ContactPage({ params }: Props) {
                       aria-label="WhatsApp"
                     >
                       <Whatsapp className="h-5 w-5" />
+                    </a>
+                    <a
+                      href={business.social.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-11 w-11 items-center justify-center border border-border text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+                      aria-label="TikTok"
+                    >
+                      <Tiktok className="h-5 w-5" />
+                    </a>
+                    <a
+                      href={business.social.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-11 w-11 items-center justify-center border border-border text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+                      aria-label="LinkedIn"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                    <a
+                      href={business.social.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-11 w-11 items-center justify-center border border-border text-foreground transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+                      aria-label="Facebook"
+                    >
+                      <Facebook className="h-5 w-5" />
                     </a>
                   </div>
                 </div>
