@@ -7,11 +7,32 @@ export const siteConfig = {
   tagline: "Waar traditie en innovatie samenkomen voor de perfecte uitstraling",
   description:
     "Premium barbershop en herenkapper in het hart van Deventer. Ervaring, vakmanschap en persoonlijke aandacht voor elke klant.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sherwanystudio.nl",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://sherwany.nl",
   locale: "nl_NL",
   localeAlternate: "en_GB",
   ogImage: "/images/sherwany-outside.jpg",
   twitterHandle: "@sherwanybarbershop",
+
+  /** Target keywords for ranking (Kapper Deventer, Barber Deventer, Sherwany, etc.) */
+  seoKeywords: [
+    "Kapper Deventer",
+    "Barber Deventer",
+    "Sherwany Barbershop",
+    "Sherwany",
+    "Barbershop Deventer",
+    "barbershop",
+    "kapper",
+    "barbier",
+    "herenkapper",
+    "Deventer kapper",
+    "herenkapper Deventer",
+    "barbier Deventer",
+    "knippen",
+    "baard",
+    "trimmen",
+    "premium kapper",
+    "Sherwany Barbershop & Studio",
+  ],
 
   business: {
     type: "BarberShop" as const,

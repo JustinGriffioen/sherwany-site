@@ -8,6 +8,7 @@ const pages: { path: string; priority: number }[] = [
   { path: "/contact", priority: 0.9 },
   { path: "/a-waxing", priority: 0.8 },
   { path: "/privacy", priority: 0.3 },
+  { path: "/sitemap", priority: 0.2 },
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

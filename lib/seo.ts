@@ -6,8 +6,8 @@ import { siteConfig } from "@/lib/site-config"
 
 const baseUrl = siteConfig.url
 
-/** Path without leading slash. nl: "" | "contact" | "a-waxing" */
-type PathKey = "" | "contact" | "a-waxing"
+/** Path without leading slash. nl: "" | "contact" | "a-waxing" | "privacy" | "sitemap" */
+export type PathKey = "" | "contact" | "a-waxing" | "privacy" | "sitemap"
 
 /** Build full URL for a locale and path */
 export function localeUrl(locale: Locale, path: PathKey = ""): string {
